@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8">
+  <title>Компьютерная помощь в Луге</title>
+  <meta name="description" content="Ремонт компьютеров и ноутбуков в Луге и Лужском районе. Решение любых технических проблем с компьютерной техникой. Переустановка Windows, чистка от пыли, восстановление данных и другие услуги">
+  <meta name="keywords" content="Луга, ремонт, ремонт компьютеров, ремонт ноутбуков, ноутбук, компьютер, переустановка, windows, чистка, диагностика">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="stylesheet" href="css/styles.min.css">
+  <meta name="copyright" content="Техно помощь Луга">
+  <script>
+    window.onload = function() {
+      var overlay = document.querySelector(".loader-overlay")
+      overlay.style.display = "none";
+    }
+  </script>
+</head>
+
+<body>
+  <div class="loader-overlay">
+    <div class="loader">
+      <svg class="circular" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" preserveAspectRatio="xMinYMin meet">
+        <text x="14" y="21" font-family="monospace" font-size="2px" style="letter-spacing:0.6px" fill="#fff">загрузка </text>
+        <circle r="13" cx="20" cy="20" fill="none" stroke="#263ab5" stroke-width="0.2"></circle>
+        <circle r="15" cx="20" cy="20" fill="none" stroke="#263ab5" stroke-width="0.2"></circle>
+        <circle id="circle-1" r="13" cx="20" cy="20" fill="none" stroke="#0498b5" stroke-width="0.25"></circle>
+        <circle id="circle-2" r="15" cx="20" cy="20" fill="none" stroke="#006bff" stroke-width="0.6"></circle>
+      </svg>
+    </div>
+  </div>
+  <header class="header fixed-top">
+    <div class="container">
+      <nav class="navbar navbar-expand-sm navbar-light">
+
+        <div class="navbar-brand" href="/">
+          <a class="logo" href="/"></a>
+          <a class="logo-text" href="/">Техно помощь Луга</a>
+        </div>
+        <button class="navbar-toggler hamburger hamburger--elastic js-hamburger" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" type="button">
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Главная</a>
+            </li>
+            <li class="nav-item dropdown">
+              <span class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Услуги
+              </span>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item " href="/video-surveillance">Видеонаблюдение</a>
+                <a class="dropdown-item " href="/computer-help">Компьютерная помощь</a>
+                <a class="dropdown-item " href="/door-phone">Домофоны</a>
+                <a class="dropdown-item " href="/learning">Обучение</a>
+                <a class="dropdown-item " href="/company">Для бизнеса</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="anchor-link nav-link" href="/#bonuses">Акции</a>
+            </li>
+            <li class="nav-item">
+              <a class="anchor-link nav-link" href="/#about">О нас</a>
+            </li>
+            <li class="nav-item">
+              <a class="anchor-link nav-link" href="#footer">Контакты</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <div id="barba-wrapper">
+    <div class="barba-container" data-namespace="support">
+      <main class="main">
+        <section class="page-hero" style="background-image: url('img/repair-hero.jpg')">
+          <div class="container">
+            <div class="page-heading animated fadeInRight ">
+              <h2>Компьютерная помощь</h2>
+            </div>
+          </div>
+        </section>
+        <section class="section page-content">
+          <canvas id="c_digits"></canvas>
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-sm-12 col-md-11">
+                <div class="service-option">
+                  <div class="option-img">
+                    <img src="/img/repair-1.jpg" alt="">
+                  </div>
+                  <div class="option-desc">
+                    Ремонт компьютеров
+                  </div>
+                  <div class="option-price">
+                    от 400 руб.
+                  </div>
+                </div>
+                <div class="service-option ">
+                  <div class="option-img">
+                    <img src="/img/repair-2.jpg" alt="">
+                  </div>
+                  <div class="option-desc">
+                    Ремонт ноутбуков
+                  </div>
+                  <div class="option-price">
+                    от 600 руб.
+                  </div>
+                </div>
+                <div class="service-option ">
+                  <div class="option-img">
+                    <img src="/img/repair-3.jpg" alt="">
+                  </div>
+                  <div class="option-desc">
+                    Ремонт мониторов
+                  </div>
+                  <div class="option-price">
+                    от 500 руб.
+                  </div>
+                </div>
+                <div class="service-option ">
+                  <div class="option-img">
+                    <img src="/img/repair-4.jpg" alt="">
+                  </div>
+                  <div class="option-desc">
+                    Диагностика
+                  </div>
+                  <div class="option-price">
+                    от 200 руб.
+                  </div>
+                </div>
+                <div class="service-option ">
+                  <div class="option-img">
+                    <img src="/img/repair-5.jpg" alt="">
+                  </div>
+                  <div class="option-desc">
+                    Профилактические работы (замена термопасты, очистка от пыли)
+                  </div>
+                  <div class="option-price">
+                    от 300 руб/мес.
+                  </div>
+                </div>
+                <div class="service-option ">
+                  <div class="option-img">
+                    <img src="/img/repair-6.jpg" alt="">
+                  </div>
+                  <div class="option-desc">
+                    Настройка сети, интернета, Wifi
+                  </div>
+                  <div class="option-price">
+                    от 300 руб.
+                  </div>
+                </div>
+                <div class="service-option ">
+                  <div class="option-img">
+                    <img src="/img/repair-7.jpg" alt="">
+                  </div>
+                  <div class="option-desc">
+                    Настройка периферийных устройств
+                  </div>
+                  <div class="option-price">
+                    от 450 руб.
+                  </div>
+                </div>
+                <div class="service-option ">
+                  <div class="option-img">
+                    <img src="/img/repair-8.jpg" alt="">
+                  </div>
+                  <div class="option-desc">
+                    Замена комплектующих вышедших из строя
+                  </div>
+                  <div class="option-price">
+                    от 200 руб/мес.
+                  </div>
+                </div>
+
+                <div class="service-option option-title justify-content-center">
+                  <h3>Программное обеспечение</h3>
+                </div>
+
+                <div class="service-option ">
+                  <div class="option-img">
+                    <img src="/img/soft-1.jpg" alt="">
+                  </div>
+                  <div class="option-desc">
+                    Windows установка чистая (ос+драйверы)
+                  </div>
+                  <div class="option-price">
+                    900 руб/мес.
+                  </div>
+                </div>
+                <div class="service-option ">
+                  <div class="option-img">
+                    <img src="/img/soft-2.png" alt="">
+                  </div>
+                  <div class="option-desc">
+                    Windows установка с сохранением данных + набор ПО(Flash Player, Office, антивирус, браузеры)
+                  </div>
+                  <div class="option-price">
+                    от 1400 руб.
+                  </div>
+                </div>
+                <div class="service-option ">
+                  <div class="option-img">
+                    <img src="/img/soft-3.jpg" alt="">
+                  </div>
+                  <div class="option-desc">
+                    Восстановление данных после удаления, повреждения
+                  </div>
+                  <div class="option-price">
+                    от 800 руб.
+                  </div>
+                </div>
+                <div class="service-option ">
+                  <div class="option-img">
+                    <img src="/img/soft-4.jpg" alt="">
+                  </div>
+                  <div class="option-desc">
+                    Очистка от вирусов и программ вымогателей
+                  </div>
+                  <div class="option-price">
+                    от 500 руб.
+                  </div>
+                </div>
+                <div class="service-option ">
+                  <div class="option-img">
+                    <img src="/img/soft-5.png" alt="">
+                  </div>
+                  <div class="option-desc">
+                    Установка Антивируса
+                  </div>
+                  <div class="option-price">
+                    200 руб.
+                  </div>
+                </div>
+                <div class="service-option ">
+                  <div class="option-img">
+                    <img src="/img/soft-6.png" alt="">
+                  </div>
+                  <div class="option-desc">
+                    Установка Офисных программ
+                  </div>
+                  <div class="option-price">
+                    от 250 руб.
+                  </div>
+                </div>
+                <div class="service-option ">
+                  <div class="option-img">
+                    <img src="/img/soft-9.jpg" alt="">
+                  </div>
+                  <div class="option-desc">
+                    Установка других программ (по требованию заказчика)
+                  </div>
+                  <div class="option-price">
+                    от 100 руб/шт.
+                  </div>
+                </div>
+
+                <div class="service-option option-title justify-content-center">
+                  <h3>Подбор комплектующих</h3>
+                </div>
+
+                <div class="service-option ">
+                  <div class="option-img">
+                    <img src="/img/hardware-1.jpg" alt="">
+                  </div>
+                  <div class="option-desc">
+                    Подбор комплектующих и сборка ПК (под ключ)
+                  </div>
+                  <div class="option-price">
+                    1200 руб.
+                  </div>
+                </div>
+                <div class="service-option ">
+                  <div class="option-img">
+                    <img src="/img/hardware-2.jpg" alt="">
+                  </div>
+                  <div class="option-desc">
+                    Помощь в выборе ноутбука/планшета
+                  </div>
+                  <div class="option-price">
+                    400 руб.
+                  </div>
+                </div>
+                <div class="service-option ">
+                  <div class="option-img">
+                    <img src="/img/hardware-4.jpg" alt="">
+                  </div>
+                  <div class="option-desc">
+                    Подбор комплектующих для замены/апгрейда
+                  </div>
+                  <div class="option-price">
+                    от 100 руб/шт.
+                  </div>
+                </div>
+                <div class="service-option ">
+                  <div class="option-img">
+                    <img src="/img/hardware-4.png" alt="">
+                  </div>
+                  <div class="option-desc">
+                    Консультирование по продуктам IT(ПО, Периферия, Софт, Ноутбуки, Комплектующие)
+                  </div>
+                  <div class="option-price">
+                    от 200 руб.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer id="footer" class="footer">
+        <div class="container">
+          <div class="row justify-content-between flex-column-reverse flex-md-row">
+            <div class="col-md-6">
+              <div class="contact">
+                <h3 class="contact-heading">Контакты</h3>
+                <a href="tel:+79062522523" class="contact-link contact-phone">+7 (906) 252-252-3</a>
+                <a href="mailto:tehnohelpluga@gmail.com" class="contact-link contact-email">tehnohelpluga@gmail.com</a>
+                <div id="vk_subscribe"></div>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="order-form">
+                <h3>Оставь заявку прямо сейчас</h3>
+                <form>
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="form-name" name="name" placeholder="Имя">
+                  </div>
+
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="form-phone" name="phone" placeholder="Телефон">
+                  </div>
+
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="form-theme" name="theme" placeholder="Тема">
+                  </div>
+
+                  <div class="form-group">
+                    <textarea class="form-control message" id="form-message" name="message" placeholder="Сообщение"></textarea>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary order-submit">Отправить</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="footer-bottom">
+                <p>Tehno help Luga</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <!-- <script src="js/scripts.min.js"></script> -->
+      <script src="js/vendor.js"></script>
+      <script src="js/main.js"></script>
+      <script src="https://vk.com/js/api/openapi.js?162" type="text/javascript"></script>
+    </div>
+  </div>
+</body>
+
+</html>
