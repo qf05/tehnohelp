@@ -63,19 +63,6 @@
                 </configuration>
             </plugin>
         </plugins>
-
-        <!--<resources>-->
-            <!--<resource>-->
-                <!--<directory>/apps/config/</directory>-->
-                <!--<filtering>true</filtering>-->
-                <!--<includes>-->
-                    <!--<include>logback.xml</include>-->
-                <!--</includes>-->
-            <!--</resource>-->
-            <!--<resource>-->
-                <!--<directory>src/main/resources</directory>-->
-            <!--</resource>-->
-        <!--</resources>-->
     </build>
 
 
@@ -163,12 +150,6 @@
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
             <version>1.4</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.vk.api</groupId>
-            <artifactId>sdk</artifactId>
-            <version>0.5.12</version>
         </dependency>
 
         <dependency>
