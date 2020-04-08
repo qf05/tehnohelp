@@ -30,17 +30,23 @@ public class Message extends HttpServlet {
         String sendMessage = MessageUtils.createMessage(name,phone,theme,message);
         boolean isSendMail = false;// EmailMessage.sendMessage(sendMessage);
         boolean isSendVk = false;//VkMessage.sendMessage(sendMessage);
-        System.out.println( isSendMail + "  " + isSendVk);
-
-        if (!isSendMail||!isSendVk){
-            resp.setContentType("application/json");
-            resp.setCharacterEncoding("utf-8");
-            JsonObject json = new JsonObject();
-            json.addProperty("status", "error");
-            PrintWriter out = resp.getWriter();
-            out.write(json.toString());
-            out.flush();
+        int i = (int) (Math.random()*4);
+        if (i % 2 == 0){
+            isSendVk=true;
         }
-        req.getRequestDispatcher("/index.html").forward(req, resp);
+//        System.out.println( isSendMail + "  " + isSendVk);
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("utf-8");
+        JsonObject json = new JsonObject();
+        if (isSendMail||isSendVk){
+            json.addProperty("message", "Ваша заявка принята");
+            json.addProperty("err", "false");
+        }else {
+            json.addProperty("message", "Ошибка отправки");
+            json.addProperty("err", "true");
+        }
+        PrintWriter out = resp.getWriter();
+        out.write(json.toString());
+        out.flush();
     }
 }
