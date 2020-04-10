@@ -22,28 +22,29 @@ public class Message extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String name = req.getParameter("name");
         String phone = req.getParameter("phone");
         String theme = req.getParameter("theme");
         String message = req.getParameter("message");
-        String sendMessage = MessageUtils.createMessage(name,phone,theme,message);
-        boolean isSendMail = false;// EmailMessage.sendMessage(sendMessage);
-        boolean isSendVk = false;//VkMessage.sendMessage(sendMessage);
-        int i = (int) (Math.random()*4);
-        if (i % 2 == 0){
-            isSendVk=true;
-        }
-//        System.out.println( isSendMail + "  " + isSendVk);
+        String sendMessage = MessageUtils.createMessage(name, phone, theme, message);
+        boolean isSendVk = VkMessage.sendMessage(sendMessage);
+
         resp.setContentType("application/json");
         resp.setCharacterEncoding("utf-8");
         JsonObject json = new JsonObject();
-        if (isSendMail||isSendVk){
+        if (isSendVk) {
             json.addProperty("message", "Ваша заявка принята");
             json.addProperty("err", "false");
-        }else {
-            json.addProperty("message", "Ошибка отправки");
-            json.addProperty("err", "true");
+        } else {
+            boolean isSendMail = EmailMessage.sendMessage(sendMessage);
+            if (isSendMail) {
+                json.addProperty("message", "Ваша заявка принята");
+                json.addProperty("err", "false");
+            } else {
+                json.addProperty("message", "Ошибка отправки");
+                json.addProperty("error", "true");
+            }
         }
         PrintWriter out = resp.getWriter();
         out.write(json.toString());

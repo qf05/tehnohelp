@@ -206,6 +206,7 @@
                 <form>
                   <div class="form-group">
                     <input type="text" class="form-control" id="form-name" name="name" placeholder="Имя">
+                    <p class="err-message"></p>
                   </div>
 
                   <div class="form-group">
@@ -218,9 +219,13 @@
 
                   <div class="form-group">
                     <textarea class="form-control message" id="form-message" name="message" placeholder="Сообщение"></textarea>
+                    <p class="err-message"></p>
                   </div>
 
-                  <button type="submit" class="btn btn-primary order-submit">Отправить</button>
+                  <div class="form-footer d-flex">
+                    <button type="submit" class="btn btn-primary order-submit">Отправить</button>
+                    <div class="submit-status animated"></div>
+                  </div>      
                 </form>
               </div>
             </div>
@@ -237,6 +242,7 @@
       <!-- <script src="js/scripts.min.js"></script> -->
       <script src="js/vendor.js"></script>
       <script src="js/main.js"></script>
+      <script src="js/number_validation.js"></script>
       <script src="https://vk.com/js/api/openapi.js?162" type="text/javascript"></script>
     </div>
   </div>

@@ -609,15 +609,15 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4">
-                            <div class="bonus-item for-subs"></div>
+                            <a href="https://vk.com/topic-184345402_39870612?post=5" class="bonus-item for-subs"></a>
                         </div>
 
                         <div class="col-md-4">
-                            <div class="bonus-item for-third"></div>
+                            <a href="https://vk.com/topic-184345402_39870612?post=15" class="bonus-item for-third"></a>
                         </div>
 
                         <div class="col-md-4">
-                            <div class="bonus-item for-older"></div>
+                            <a href="https://vk.com/topic-184345402_39870612?post=6" class="bonus-item for-older"></a>
                         </div>
                     </div>
                 </div>
@@ -640,15 +640,13 @@
                             <form>
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="form-name" name="name"
-                                           placeholder="Имя"/>
+                                           placeholder="Имя"/>                                           
                                 </div>
 
                                 <div class="form-group">
-                                    <!--<input type="tel" class="form-control" id="form-phone" name="phone"-->
-                                           <!--placeholder="Телефон"/>-->
-
                                     <input type="tel" class="form-control" id="form-phone" name="phone"
                                            maxlength="18" placeholder="+7 (XXX) XXX-XX-XX" autocomplete="on"/>
+                                    <p class="err-message"></p>
                                 </div>
 
                                 <div class="form-group">
@@ -659,9 +657,13 @@
                                 <div class="form-group">
                                     <textarea class="form-control message" id="form-message" name="message"
                                               placeholder="Сообщение"></textarea>
+                                    <p class="err-message"></p>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary order-submit">Отправить</button>
+                                <div class="form-footer d-flex">
+                                        <button type="submit" class="btn btn-primary order-submit">Отправить</button>
+                                        <div class="submit-status animated"></div>
+                                </div>                                
                             </form>
                         </div>
                     </div>
