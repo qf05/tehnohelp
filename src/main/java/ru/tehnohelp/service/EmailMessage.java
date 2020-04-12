@@ -5,13 +5,12 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
-import static ru.tehnohelp.service.MessageUtils.PROPERTIES;
-
 
 public class EmailMessage {
 
     private static final String username = "qf013";
-    private static final String password = PROPERTIES.getProperty("password_mail"); // aplication password
+    //    private static final String password = PROPERTIES.getProperty("password_mail"); // aplication password
+    private static final String password = ""; // aplication password
 
     private static final String toEmail = "tehnohelpluga@gmail.com";
     private static final String theme = "Новая заявка с сайта";

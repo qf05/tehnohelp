@@ -154,7 +154,9 @@
             phone.nextElementSibling.style.display = "block";
           }
 
-          if (phone.value.length && phone.value.length < 18) {
+          var phoneDigits = phone.value.replace(/\D/g,'').length;
+
+          if (phone.value.length && phoneDigits < 11) {
             phone.classList.add("invalid");
             phone.nextElementSibling.textContent = "Номер ввёден неправильно";
             phone.nextElementSibling.style.display = "block";
@@ -169,7 +171,7 @@
             msg.nextElementSibling.textContent = "Необходимо написать сообщение";
           }
 
-          if (msg.value.length && phone.value.length === 18) {
+          if (msg.value.length && phoneDigits === 11) {
             var data = $(form).serialize();
             var formStatus = $(".submit-status");
 

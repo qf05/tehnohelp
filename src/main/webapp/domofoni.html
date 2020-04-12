@@ -223,7 +223,8 @@
                   </div>
 
                   <div class="form-group">
-                    <input type="text" class="form-control" id="form-phone" name="phone" placeholder="Телефон">
+                    <input type="tel" onkeydown="return phonechange(event, this);" onblur="phoneblur(this)" onfocus="phoneclick(this)" class="form-control form-phone" id="form-phone" name="phone"
+                           maxlength="18" placeholder="+7 (XXX) XXX-XX-XX" autocomplete="on"/>
                     <p class="err-message"></p>
                   </div>
 
@@ -252,14 +253,13 @@
             </div>
           </div>
         </div>
-      </footer>
-      <!-- <script src="js/scripts.min.js"></script> -->
-      <script src="js/vendor.js"></script>
-      <script src="js/main.js"></script>
-      <script src="js/number_validation.js"></script>
-      <script src="https://vk.com/js/api/openapi.js?162" type="text/javascript"></script>
+      </footer>      
     </div>
-  </div>
+  </div>  
+  <script src="js/vendor.js"></script>
+  <script src="js/number_validation.js"></script>
+  <script src="js/main.js"></script>
+  <script src="https://vk.com/js/api/openapi.js?162" type="text/javascript"></script>
 </body>
 
 </html>

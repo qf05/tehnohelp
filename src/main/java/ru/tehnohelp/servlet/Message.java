@@ -37,14 +37,14 @@ public class Message extends HttpServlet {
             json.addProperty("message", "Ваша заявка принята");
             json.addProperty("err", "false");
         } else {
-            boolean isSendMail = EmailMessage.sendMessage(sendMessage);
-            if (isSendMail) {
-                json.addProperty("message", "Ваша заявка принята");
-                json.addProperty("err", "false");
-            } else {
+//            boolean isSendMail = EmailMessage.sendMessage(sendMessage);
+//            if (isSendMail) {
+//                json.addProperty("message", "Ваша заявка принята");
+//                json.addProperty("err", "false");
+//            } else {
                 json.addProperty("message", "Ошибка отправки");
                 json.addProperty("error", "true");
-            }
+//            }
         }
         PrintWriter out = resp.getWriter();
         out.write(json.toString());
