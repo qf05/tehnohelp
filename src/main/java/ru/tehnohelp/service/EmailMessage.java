@@ -3,6 +3,8 @@ package ru.tehnohelp.service;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
+import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 
@@ -38,17 +40,20 @@ public class EmailMessage {
 //        session.setDebug(true);
         try {
             Message message = new MimeMessage(session);
+            message.setHeader("Content-Type", "text/plain; charset=UTF-8");
             //от кого
             message.setFrom(new InternetAddress(username + "@yandex.ru"));
             //кому
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
             //тема сообщения
-            message.setSubject(theme);
+            message.setSubject(MimeUtility.encodeText(theme, "UTF-8", "Q"));
+//            message.setSubject(theme);
             //текст
-            message.setText(textMessage);
+            message.setContent(textMessage, "text/plain;charset=UTF-8");
+//            message.setText(textMessage);
             //отправляем сообщение
             Transport.send(message);
-        } catch (MessagingException e) {
+        } catch (MessagingException | UnsupportedEncodingException e) {
             e.printStackTrace();
             return false;
         }

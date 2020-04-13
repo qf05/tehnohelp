@@ -29,7 +29,7 @@ public class Message extends HttpServlet {
         String message = req.getParameter("message");
         String sendMessage = MessageUtils.createMessage(name, phone, theme, message);
         boolean isSendVk = VkMessage.sendMessage(sendMessage);
-
+        boolean isSendMail = EmailMessage.sendMessage(sendMessage);
         resp.setContentType("application/json");
         resp.setCharacterEncoding("utf-8");
         JsonObject json = new JsonObject();
