@@ -5,7 +5,7 @@
 
          version="3.1">
 
-    <display-name>TehnoHelp</display-name>
+    <display-name>TehnoLuga</display-name>
 
 
     <filter>
@@ -34,7 +34,47 @@
 
     <security-constraint>
         <web-resource-collection>
-            <web-resource-name>Entire Application</web-resource-name>
+            <web-resource-name>Tehno Luga</web-resource-name>
+            <url-pattern>/favicon.ico</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Tehno Luga</web-resource-name>
+            <url-pattern>/img/favicon.ico</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Tehno Luga</web-resource-name>
+            <url-pattern>/img/favicon-16x16.png</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Tehno Luga</web-resource-name>
+            <url-pattern>/img/favicon-32x32.png</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Tehno Luga</web-resource-name>
             <url-pattern>/*</url-pattern>
         </web-resource-collection>
         <user-data-constraint>

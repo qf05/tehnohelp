@@ -141,6 +141,7 @@
 
         $(".order-submit").click(function(event) {
           event.preventDefault();
+          var btn = $(this);
           var form = document.forms[0];
           var phone = form.childNodes[3].childNodes[1];
           var msg = form.childNodes[7].childNodes[1];
@@ -174,6 +175,7 @@
           if (msg.value.length && phoneDigits === 11) {
             var data = $(form).serialize();
             var formStatus = $(".submit-status");
+            btn.attr("disabled", true);
 
             $.ajax({
               url: "/sendmessage",
@@ -182,9 +184,11 @@
             })
               .done(function(data) {
                 form.reset();
+                btn.attr("disabled", false);
                 showStatus(formStatus, data.error, data.message);            
               })
               .fail(function(err) {
+                btn.attr("disabled", false);
                 showStatus(formStatus, err.response.error, err.response.message);            
               });
           }
