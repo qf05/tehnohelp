@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<posts>
+    <post id="dom">
+        <message>
+            пост про домофон
+        </message>
+        <attachments>
+            photo565153037_457239018
+        </attachments>
+    </post>
+
+    <post id="video">
+        <message>
+            not public пост про видеонаблюдение
+        </message>
+        <attachments>
+            photo565153037_457239018
+        </attachments>
+    </post>
+
+    <post id="tv">
+        <message>
+            not public пост про тв
+        </message>
+        <attachments>
+            photo565153037_457239018
+        </attachments>
+    </post>
+
+    <post id="i">
+        <message>
+            not public пост про интернет
+        </message>
+        <attachments>
+            photo565153037_457239018
+        </attachments>
+    </post>
+</posts>

@@ -1,4 +1,4 @@
-package ru.tehnohelp.service;
+package ru.tehnohelp.message;
 
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
@@ -10,8 +10,8 @@ import com.vk.api.sdk.httpclient.HttpTransportClient;
 public class VkMessage {
 
     private static final int GID = 194043958;
-    //    private static final String GTOKEN = PROPERTIES.getProperty("token_vk");
-    private static final String GTOKEN = "";
+    private static final String GTOKEN = MessageUtils.loadPassword(MessageUtils.VK);
+//    private static final String GTOKEN = "";
 
     private static final TransportClient transportClient = HttpTransportClient.getInstance();
     private static final VkApiClient vk = new VkApiClient(transportClient);

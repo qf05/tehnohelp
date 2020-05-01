@@ -1,9 +1,12 @@
 package ru.tehnohelp.servlet;
 
 import com.google.gson.JsonObject;
-import ru.tehnohelp.service.EmailMessage;
-import ru.tehnohelp.service.MessageUtils;
-import ru.tehnohelp.service.VkMessage;
+import ru.tehnohelp.message.EmailMessage;
+import ru.tehnohelp.message.MessageUtils;
+import ru.tehnohelp.message.VkMessage;
+import ru.tehnohelp.wallpost.Command;
+import ru.tehnohelp.wallpost.CommandService;
+import ru.tehnohelp.wallpost.VkWallPosting;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,32 +25,51 @@ public class Message extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("utf-8");
         String name = req.getParameter("name");
         String phone = req.getParameter("phone");
         String theme = req.getParameter("theme");
         String message = req.getParameter("message");
+
+        if ("+7 (921) 924-12-24".equals(phone) && "post".equals(theme)) {
+            Command command = Command.getByValue(message.toLowerCase().trim());
+            if (command == null) {
+                print(resp, createJson("Ошибка команды", true));
+                System.out.println("not found command");
+            } else {
+                String result = CommandService.managerCommand(command);
+                print(resp, createJson(result, result.contains("error")));
+                System.out.println(result);
+            }
+            return;
+        }
+
         String sendMessage = MessageUtils.createMessage(name, phone, theme, message);
         boolean isSendVk = VkMessage.sendMessage(sendMessage);
         boolean isSendMail = EmailMessage.sendMessage(sendMessage);
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("utf-8");
-        JsonObject json = new JsonObject();
         if (isSendVk) {
-            json.addProperty("message", "Ваша заявка принята");
-            json.addProperty("err", "false");
+            print(resp, createJson("Ваша заявка принята", false));
         } else {
-//            boolean isSendMail = EmailMessage.sendMessage(sendMessage);
-//            if (isSendMail) {
-//                json.addProperty("message", "Ваша заявка принята");
-//                json.addProperty("err", "false");
-//            } else {
-                json.addProperty("message", "Ошибка отправки");
-                json.addProperty("error", "true");
-//            }
+            print(resp, createJson("Ошибка отправки", true));
         }
-        PrintWriter out = resp.getWriter();
-        out.write(json.toString());
-        out.flush();
+    }
+
+    private void print(HttpServletResponse resp, JsonObject json) {
+        try {
+            PrintWriter out = resp.getWriter();
+            out.write(json.toString());
+            out.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private JsonObject createJson(String message, boolean error) {
+        JsonObject json = new JsonObject();
+        json.addProperty("message", message);
+        json.addProperty("error", error);
+        return json;
     }
 }

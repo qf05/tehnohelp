@@ -1,4 +1,4 @@
-package ru.tehnohelp.service;
+package ru.tehnohelp.message;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -11,8 +11,8 @@ import java.util.Properties;
 public class EmailMessage {
 
     private static final String username = "qf013";
-    //    private static final String password = PROPERTIES.getProperty("password_mail"); // aplication password
-    private static final String password = ""; // aplication password
+    private static final String password = MessageUtils.loadPassword(MessageUtils.EMAIL); // aplication password
+//    private static final String password = ""; // aplication password
 
     private static final String toEmail = "tehnohelpluga@gmail.com";
     private static final String theme = "Новая заявка с сайта";
