@@ -45,12 +45,14 @@ public class VkWallPosting {
         }
         return error == 0 && errorInLoad == 0 ? "Команда выполнена" : "COMMAND error " + error + " error load " + errorInLoad;
     }
-
+static long  test = 0;
     private static synchronized void synchronizePost(Integer groupId, Post post) {
         synchronized (object) {
             loop = 0;
-            post(groupId, post);
-            System.out.println(post.getMessage());
+            test++;
+            System.out.println("test  " + test);
+//            post(groupId, post);
+//            System.out.println(post.getMessage());
         }
     }
 

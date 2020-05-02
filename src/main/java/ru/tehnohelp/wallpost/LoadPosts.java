@@ -7,19 +7,21 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 public class LoadPosts {
 
     protected static Post loadPost(Command command) {
         InputStream resourceAsStream = LoadPosts.class.getClassLoader().getResourceAsStream("/posts/posts.xml");
-        if (resourceAsStream!=null) {
+        Post post = null;
+        if (resourceAsStream != null) {
             try {
                 DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
                 Document document = builder.parse(resourceAsStream);
@@ -37,7 +39,7 @@ public class LoadPosts {
                 if (element != null) {
                     String message = element.getElementsByTagName("message").item(0).getTextContent().trim();
                     String attach = element.getElementsByTagName("attachments").item(0).getTextContent().trim();
-                    return new Post(message, attach + ",https://tehnoluga.ru");
+                    post = new Post(message, attach + ",https://tehnoluga.ru");
                 } else {
                     VkWallPosting.errorInLoad++;
                 }
@@ -45,29 +47,32 @@ public class LoadPosts {
                 e.printStackTrace();
                 VkWallPosting.errorInLoad++;
             }
-        }else {
+        } else {
             VkWallPosting.errorInLoad++;
         }
-        return null;
+        closeResource(resourceAsStream);
+        return post;
     }
 
     protected static String loadToken() {
         InputStream resourceAsStream = LoadPosts.class.getClassLoader().getResourceAsStream("/properties/password.properties");
         Properties prop = new Properties();
+        String token = "";
         try {
             prop.load(resourceAsStream);
-            return prop.getProperty("token_garsey");
+            token = prop.getProperty("token_garsey");
         } catch (IOException e) {
             e.printStackTrace();
             VkWallPosting.errorInLoad++;
         }
-        return "";
+        closeResource(resourceAsStream);
+        return token;
     }
 
     protected static List<Integer> loadIds() {
         List<Integer> ids = new ArrayList<>();
+        InputStream inputStream = LoadPosts.class.getClassLoader().getResourceAsStream("/posts/groupIds.txt");
         try {
-            InputStream inputStream = LoadPosts.class.getClassLoader().getResourceAsStream("/posts/groupIds.txt");
             if (inputStream != null) {
                 String result = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
                 String[] stringIds = result.split(",");
@@ -86,15 +91,17 @@ public class LoadPosts {
             e.printStackTrace();
             VkWallPosting.errorInLoad++;
         }
+        closeResource(inputStream);
         return ids;
     }
 
-    public static Time getTimeProperty(){
+    public static Time getTimeProperty() {
         InputStream resourceAsStream = LoadPosts.class.getClassLoader().getResourceAsStream("/posts/time.properties");
         Properties prop = new Properties();
+        Time time = null;
         try {
             prop.load(resourceAsStream);
-            return new Time(Integer.parseInt(prop.getProperty("day_add")),
+            time = new Time(Integer.parseInt(prop.getProperty("day_add")),
                     Integer.parseInt(prop.getProperty("day_random")),
                     Integer.parseInt(prop.getProperty("hour_add")),
                     Integer.parseInt(prop.getProperty("hour_random")),
@@ -104,7 +111,48 @@ public class LoadPosts {
                     Integer.parseInt(prop.getProperty("sec_random")));
         } catch (IOException e) {
             e.printStackTrace();
+            VkWallPosting.errorInLoad++;
+        }
+        closeResource(resourceAsStream);
+        return time;
+    }
+
+    public static void saveTimeMap(Map<Command, Long> map) {
+        URL resource = LoadPosts.class.getClassLoader().getResource("/posts/resume.txt");
+        File f = null;
+        try {
+            assert resource != null;
+            f = new File(resource.toURI());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        assert f != null;
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(
+                new FileOutputStream(f))) {
+            objectOutputStream.writeObject(map);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Map<Command, Long> loadTimeMap() {
+        try(ObjectInputStream objectInputStream = new ObjectInputStream(
+                LoadPosts.class.getClassLoader().getResourceAsStream("/posts/resume.txt"))){
+            return (Map<Command, Long>) objectInputStream.readObject();
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return null;
+    }
+
+    public static void closeResource(InputStream inputStream) {
+        if (inputStream != null) {
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+                VkWallPosting.errorInLoad++;
+            }
+        }
     }
 }

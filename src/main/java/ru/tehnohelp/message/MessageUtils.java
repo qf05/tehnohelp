@@ -1,5 +1,7 @@
 package ru.tehnohelp.message;
 
+import ru.tehnohelp.wallpost.LoadPosts;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -15,16 +17,19 @@ public class MessageUtils {
     protected static String loadPassword(String service) {
         InputStream resourceAsStream = MessageUtils.class.getClassLoader().getResourceAsStream("/properties/password.properties");
         Properties prop = new Properties();
+        String pass= "";
         try {
             prop.load(resourceAsStream);
         } catch (IOException e) {
             e.printStackTrace();
         }
         if (VK.equals(service)) {
-            return prop.getProperty(VK);
+            pass = prop.getProperty(VK);
         } else {
-            return prop.getProperty(EMAIL);
+            pass = prop.getProperty(EMAIL);
         }
+        LoadPosts.closeResource(resourceAsStream);
+        return pass;
     }
 
     public static String createMessage(String name, String tel, String theme, String message) {
