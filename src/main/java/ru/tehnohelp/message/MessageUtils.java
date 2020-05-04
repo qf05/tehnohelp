@@ -8,25 +8,38 @@ import java.util.Properties;
 
 public class MessageUtils {
 
-    public static final String VK = "token_vk";
+    public static final String GVK = "token_vk";
     public static final String EMAIL = "password_mail";
+    public static final String VK = "token_garsey";
+    public static final String CAPTCHA = "captcha_key";
 
     private MessageUtils() {
     }
 
-    protected static String loadPassword(String service) {
+    public static String loadPassword(String property) {
         InputStream resourceAsStream = MessageUtils.class.getClassLoader().getResourceAsStream("/properties/password.properties");
         Properties prop = new Properties();
-        String pass= "";
+        String pass = "";
         try {
             prop.load(resourceAsStream);
+            switch (property) {
+                case GVK:
+                    pass = prop.getProperty(GVK);
+                    break;
+                case EMAIL:
+                    pass = prop.getProperty(EMAIL);
+                    break;
+                case VK:
+                    pass = prop.getProperty(VK);
+                    break;
+                case CAPTCHA:
+                    pass = prop.getProperty(CAPTCHA);
+                    break;
+                default:
+                    pass = "";
+            }
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        if (VK.equals(service)) {
-            pass = prop.getProperty(VK);
-        } else {
-            pass = prop.getProperty(EMAIL);
         }
         LoadPosts.closeResource(resourceAsStream);
         return pass;

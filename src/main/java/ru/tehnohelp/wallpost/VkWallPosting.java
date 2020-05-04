@@ -9,14 +9,18 @@ import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.HttpTransportClient;
 import net.marketer.RuCaptcha;
 import org.apache.commons.io.FileUtils;
+import ru.tehnohelp.message.MessageUtils;
 
 import java.io.File;
 import java.net.URL;
 
+import static ru.tehnohelp.message.MessageUtils.CAPTCHA;
+import static ru.tehnohelp.message.MessageUtils.VK;
+
 public class VkWallPosting {
 
     private static final int ID = 565153037;
-    private static final String TOKEN = LoadPosts.loadToken();
+    private static final String TOKEN = MessageUtils.loadPassword(VK);
 
     private static final Object object = new Object();
     private static final TransportClient transportClient = HttpTransportClient.getInstance();
@@ -26,6 +30,10 @@ public class VkWallPosting {
     protected static int errorInLoad = 0;
     private static int error = 0;
     private static int loop = 0;
+
+    static {
+        RuCaptcha.API_KEY = MessageUtils.loadPassword(CAPTCHA);
+    }
 
     protected static String sendPost(Command key) {
         errorInLoad = 0;
@@ -50,8 +58,8 @@ static long  test = 0;
         synchronized (object) {
             loop = 0;
             test++;
-            System.out.println("test  " + test);
-//            post(groupId, post);
+//            System.out.println("test  " + test);
+            post(groupId, post);
 //            System.out.println(post.getMessage());
         }
     }
@@ -101,7 +109,6 @@ static long  test = 0;
     }
 
     private static String captchaDecryption(String captchaImg) {
-        RuCaptcha.API_KEY = "132f6d37ff945d8b9719f9808a83ee6b";
         String decryption = "";
         String captchaId = "";
         try {

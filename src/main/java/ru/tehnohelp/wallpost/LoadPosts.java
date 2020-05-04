@@ -54,21 +54,6 @@ public class LoadPosts {
         return post;
     }
 
-    protected static String loadToken() {
-        InputStream resourceAsStream = LoadPosts.class.getClassLoader().getResourceAsStream("/properties/password.properties");
-        Properties prop = new Properties();
-        String token = "";
-        try {
-            prop.load(resourceAsStream);
-            token = prop.getProperty("token_garsey");
-        } catch (IOException e) {
-            e.printStackTrace();
-            VkWallPosting.errorInLoad++;
-        }
-        closeResource(resourceAsStream);
-        return token;
-    }
-
     protected static List<Integer> loadIds() {
         List<Integer> ids = new ArrayList<>();
         InputStream inputStream = LoadPosts.class.getClassLoader().getResourceAsStream("/posts/groupIds.txt");

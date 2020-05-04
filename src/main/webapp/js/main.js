@@ -240,23 +240,23 @@
           }
         });
         new Waypoint({
-          element: $(".about"),
-          offset: window.matchMedia("(min-width: 1440px)").matches ? "70%" : "50%",
-          handler: function handler(direction) {
-            $(".about .heading").addClass("animated fadeInUp");
-            $(".about-text").addClass("animated fadeIn");
-            $(".about #vk_groups").addClass("animated fadeInRight");
-          }
+            element: $(".about"),
+            offset: window.matchMedia("(min-width: 1440px)").matches ? "70%" : "60%",
+            handler: function handler(direction) {
+                $(".about .heading").addClass("animated fadeInUp");
+                $(".about-text").addClass("animated fadeIn");
+                $(".about #vk_groups").addClass("animated fadeInRight");
+            }
         });
 
         new Waypoint({
-          element: $(".advantages"),
-          offset: window.matchMedia("(min-width: 1440px)").matches ? "70%" : "50%",
-          handler: function handler(direction) {
-            $(".advantages .heading").addClass("animated fadeInUp");
-            $(".adv-pic-1, .adv-pic-2").addClass("animated zoomIn");
-            $(".adv-option").addClass("animated fadeInRight");
-          }
+            element: $(".advantages"),
+            offset: window.matchMedia("(min-width: 1440px)").matches ? "70%" : "60%",
+            handler: function handler(direction) {
+                $(".advantages .heading").addClass("animated fadeInUp");
+                $(".adv-pic-1, .adv-pic-2").addClass("animated zoomIn");
+                $(".adv-option").addClass("animated fadeInRight");
+            }
         });
 
         new Waypoint({
