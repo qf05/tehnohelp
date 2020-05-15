@@ -7,6 +7,7 @@ import com.vk.api.sdk.exceptions.ApiCaptchaException;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.HttpTransportClient;
+import com.vk.api.sdk.objects.wall.WallPostFull;
 import net.marketer.RuCaptcha;
 import org.apache.commons.io.FileUtils;
 import ru.tehnohelp.message.MessageUtils;
@@ -16,6 +17,7 @@ import java.net.URL;
 
 import static ru.tehnohelp.message.MessageUtils.CAPTCHA;
 import static ru.tehnohelp.message.MessageUtils.VK;
+import static ru.tehnohelp.wallpost.LoadPosts.loadPostFromGroup;
 
 public class VkWallPosting {
 
@@ -41,7 +43,7 @@ public class VkWallPosting {
         if (actor == null) {
             actor = new UserActor(ID, TOKEN);
         }
-        Post post = LoadPosts.loadPost(key);
+        Post post = loadPostFromGroup(key);
         if (post != null) {
             if (!post.getMessage().startsWith("not public")) {
                 for (Integer groupId : LoadPosts.loadIds()) {
@@ -53,45 +55,24 @@ public class VkWallPosting {
         }
         return error == 0 && errorInLoad == 0 ? "Команда выполнена" : "COMMAND error " + error + " error load " + errorInLoad;
     }
-static long  test = 0;
+
+    static long test = 0;
+
     private static synchronized void synchronizePost(Integer groupId, Post post) {
         synchronized (object) {
             loop = 0;
             test++;
-//            System.out.println("test  " + test);
-            post(groupId, post);
-//            System.out.println(post.getMessage());
+            post(groupId, post, null, null);
         }
     }
 
-    private static void post(Integer groupId, Post post) {
+    private static void post(Integer groupId, Post post, String captchaSid, String captchaKey) {
         if (loop > 6) {
             return;
         }
         try {
-            vk.wall().post(actor).ownerId(groupId).message(post.getMessage()).attachments(post.getAttachments()).execute();
-            Thread.sleep(400);
-        } catch (ApiCaptchaException e) {
-            error += captcha(e.getSid(), e.getImage(), post, groupId);
-        } catch (ApiException | ClientException | InterruptedException e) {
-            error++;
-            e.printStackTrace();
-        }
-    }
-
-    private static Integer captcha(String captchaSid, String captchaImg, Post post, Integer groupId) {
-        if (loop > 6) {
-            return 0;
-        }
-        String captchaKey = captchaDecryption(captchaImg);
-        if (captchaKey.contains("error")) {
-            error += 1000;
-            post(groupId, post);
-            return 0;
-        }
-        try {
-            vk.wall().post(actor)
-                    .ownerId(groupId)
+            loop++;
+            vk.wall().post(actor).ownerId(groupId)
                     .message(post.getMessage())
                     .attachments(post.getAttachments())
                     .captchaSid(captchaSid)
@@ -99,13 +80,21 @@ static long  test = 0;
                     .execute();
             Thread.sleep(400);
         } catch (ApiCaptchaException e) {
-            error += captcha(e.getSid(), e.getImage(), post, groupId);
-            loop++;
+            String decryption = captcha(e.getImage());
+            post(groupId, post, e.getSid(), decryption);
         } catch (ApiException | ClientException | InterruptedException e) {
-            e.printStackTrace();
             error++;
+            e.printStackTrace();
         }
-        return error;
+    }
+
+    private static String captcha(String captchaImg) {
+        String captchaKey = captchaDecryption(captchaImg);
+        if (captchaKey.contains("error")) {
+            error += 1000;
+            captchaKey = null;
+        }
+        return captchaKey;
     }
 
     private static String captchaDecryption(String captchaImg) {
@@ -122,12 +111,15 @@ static long  test = 0;
             String response = RuCaptcha.postCaptcha(file);
             if (response.startsWith("OK")) {
                 captchaId = response.substring(3);
-
+                int loop = 0;
                 while (true) {
+                    if (loop > 40) {
+                        break;
+                    }
                     response = RuCaptcha.getDecryption(captchaId);
                     if (response.equals(RuCaptcha.Responses.CAPCHA_NOT_READY.toString())) {
                         Thread.sleep(5000);
-                        continue;
+                        loop++;
                     } else {
                         if (response.startsWith("OK")) {
                             decryption = response.substring(3);
@@ -145,5 +137,15 @@ static long  test = 0;
             e.printStackTrace();
         }
         return decryption;
+    }
+
+    protected static WallPostFull loadPostFromWall(String postId) {
+        try {
+            Thread.sleep(400);
+            return vk.wall().getById(actor, postId).execute().get(0);
+        } catch (ApiException | ClientException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

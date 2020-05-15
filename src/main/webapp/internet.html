@@ -2,468 +2,486 @@
 <html lang="ru">
 
 <head>
-  <meta charset="utf-8">
-  <title>Интернет и спутниковое ТВ</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
-  <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
-  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon.png">
-  <link rel="manifest" href="/site.webmanifest">
-  <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
-  <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="theme-color" content="#ffffff">
-  <link rel="stylesheet" href="css/styles.min.css">
-  <meta name="copyright" content="Техно помощь Луга">
-  <script>
-    window.onload = function() {
-      var overlay = document.querySelector(".loader-overlay")
-      overlay.style.display = "none";
-    }
-  </script>
+    <meta charset="utf-8">
+    <title>Интернет и спутниковое ТВ</title>
+    <meta name="description"
+          content="Установка спутникового телевидения Триколор МТС НТВ+ в Луге и Лужском районе. Продажа комплектов спутникового ТВ в Луге и Лужском районе. Установка комплектов Интернет на Дачу в Луге и Лужском районе. Антенны усиления сигнала сотовой связи и 3G/4G интернета в Луге и Лужском районе.">
+    <meta name="keywords" content="Луга, спутниковое тв, триколор, нтв+, мтс, антенна 3G, антенна 4G, интернет на дачу">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta property="og:title" content="Интернет и спутниковое ТВ">
+    <meta property="og:site_name" content="Техно помощь Луга">
+    <meta property="og:url" content="https://tehnoluga.ru/tv_and_internet">
+    <meta property="og:description"
+          content="Установка спутникового телевидения Триколор МТС НТВ+ в Луге и Лужском районе. Продажа комплектов спутникового ТВ в Луге и Лужском районе. Установка комплектов Интернет на Дачу в Луге и Лужском районе. Антенны усиления сигнала сотовой связи и 3G/4G интернета в Луге и Лужском районе.">
+    <meta property="og:image" content="https://tehnoluga.ru/img/ico.jpg">
+    <link rel="image_src" href="https://tehnoluga.ru/img/ico.jpg"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="css/styles.min.css">
+    <meta name="copyright" content="Техно помощь Луга">
+    <script>
+        window.onload = function () {
+            var overlay = document.querySelector(".loader-overlay")
+            overlay.style.display = "none";
+        }
+    </script>
 </head>
 
 <body>
-  <div class="loader-overlay">
+<div class="loader-overlay">
     <div class="loader">
-      <svg class="circular" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" preserveAspectRatio="xMinYMin meet">
-        <text x="14" y="21" font-family="monospace" font-size="2px" style="letter-spacing:0.6px" fill="#fff">загрузка </text>
-        <circle r="13" cx="20" cy="20" fill="none" stroke="#263ab5" stroke-width="0.2"></circle>
-        <circle r="15" cx="20" cy="20" fill="none" stroke="#263ab5" stroke-width="0.2"></circle>
-        <circle id="circle-1" r="13" cx="20" cy="20" fill="none" stroke="#0498b5" stroke-width="0.25"></circle>
-        <circle id="circle-2" r="15" cx="20" cy="20" fill="none" stroke="#006bff" stroke-width="0.6"></circle>
-      </svg>
+        <svg class="circular" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"
+             preserveAspectRatio="xMinYMin meet">
+            <text x="14" y="21" font-family="monospace" font-size="2px" style="letter-spacing:0.6px" fill="#fff">
+                загрузка
+            </text>
+            <circle r="13" cx="20" cy="20" fill="none" stroke="#263ab5" stroke-width="0.2"></circle>
+            <circle r="15" cx="20" cy="20" fill="none" stroke="#263ab5" stroke-width="0.2"></circle>
+            <circle id="circle-1" r="13" cx="20" cy="20" fill="none" stroke="#0498b5" stroke-width="0.25"></circle>
+            <circle id="circle-2" r="15" cx="20" cy="20" fill="none" stroke="#006bff" stroke-width="0.6"></circle>
+        </svg>
     </div>
-  </div>
-  <header class="header fixed-top">
+</div>
+<header class="header fixed-top">
     <div class="container">
-      <nav class="navbar navbar-expand-sm navbar-light">
+        <nav class="navbar navbar-expand-sm navbar-light">
 
-        <div class="navbar-brand" href="/">
-          <a class="logo" href="/"></a>
-          <a class="logo-text" href="/">Техно помощь Луга</a>
-        </div>
-        <button class="navbar-toggler hamburger hamburger--elastic js-hamburger" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" type="button">
+            <div class="navbar-brand" href="/">
+                <a class="logo" href="/"></a>
+                <a class="logo-text" href="/">Техно помощь Луга</a>
+            </div>
+            <button class="navbar-toggler hamburger hamburger--elastic js-hamburger" data-toggle="collapse"
+                    data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation" type="button">
           <span class="hamburger-box">
             <span class="hamburger-inner"></span>
           </span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="/">Главная</a>
-            </li>
-            <li class="nav-item dropdown">
-              <span class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Главная</a>
+                    </li>
+                    <li class="nav-item dropdown">
+              <span class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
                 Услуги
               </span>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item " href="/video-surveillance">Видеонаблюдение</a>
-                <a class="dropdown-item " href="/door-phone">Домофоны</a>
-                <a class="dropdown-item " href="/tv_and_internet">Спутниковое ТВ и Интернет</a>
-                <a class="dropdown-item " href="/computer-help">Компьютерная помощь</a>
-                <a class="dropdown-item " href="/learning">Обучение</a>
-                <a class="dropdown-item " href="/company">Для бизнеса</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="anchor-link nav-link" href="/#bonuses">Акции</a>
-            </li>
-            <li class="nav-item">
-              <a class="anchor-link nav-link" href="/#about">О нас</a>
-            </li>
-            <li class="nav-item">
-              <a class="anchor-link nav-link" href="#footer">Контакты</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item " href="/video-surveillance">Видеонаблюдение</a>
+                            <a class="dropdown-item " href="/door-phone">Домофоны</a>
+                            <a class="dropdown-item " href="/tv_and_internet">Спутниковое ТВ и Интернет</a>
+                            <a class="dropdown-item " href="/computer-help">Компьютерная помощь</a>
+                            <a class="dropdown-item " href="/learning">Обучение</a>
+                            <a class="dropdown-item " href="/company">Для бизнеса</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="anchor-link nav-link" href="/#bonuses">Акции</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="anchor-link nav-link" href="/#about">О нас</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="anchor-link nav-link" href="#footer">Контакты</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     </div>
-  </header>
-  <div id="barba-wrapper">
+</header>
+<div id="barba-wrapper">
     <div class="barba-container" data-namespace="internet">
-      <main class="main">
-        <section class="page-hero bg-itv">
-          <div class="page-heading animated fadeInRight">
-            <h2>Интернет и спутниковое ТВ</h2>
-          </div>
-        </section>
-        <section class="section page-content">
-          <canvas id="c_digits"></canvas>
-          <div class="container">
-            <div class="row justify-content-center">
-              <div class="col-sm-12 col-md-11">
-                <div class="service-option ">
-                  <div class="option-img">
-                    <img src="/img/itv5.jpg" alt="">
-                  </div>
-                  <div class="option-info">
-                    <div class="option-desc">
-                      Комплект спутникового ТВ <span class="simple-color-red">МТС </span>
-                    </div>
-                    <div class="option-price">
-                      от 2990 руб.
-                    </div>
-                  </div>
+        <main class="main">
+            <section class="page-hero bg-itv">
+                <div class="page-heading animated fadeInRight">
+                    <h2>Интернет и спутниковое ТВ</h2>
                 </div>
-                <div class="service-option ">
-                  <div class="option-img">
-                    <img src="/img/itv24.jpg" alt="">
-                  </div>
-                  <div class="option-info">
-                    <div class="option-desc">
-                      Комплект спутникового ТВ <span class="simple-color-green">НТВ+</span>
-                    </div>
-                    <div class="option-price">
-                      от 5900 руб.
-                    </div>
-                  </div>
-                </div>
-                <div class="service-option ">
-                  <div class="option-img">
-                    <img src="/img/itv13.jpg" alt="">
-                  </div>
-                  <div class="option-info">
-                    <div class="option-desc">
-                      Комплект спутникового ТВ <span class="simple-color-blue">Триколор</span>
-                    </div>
-                    <div class="option-price">
-                      от 6400 руб.
-                    </div>
-                  </div>
-                </div>
-                <div class="service-option ">
-                  <div class="option-img">
-                    <img src="/img/itv22.jpg" alt="">
-                  </div>
-                  <div class="option-info">
-                    <div class="option-desc">
-                      Ресивер <span class="simple-color-red">МТС</span>
-                    </div>
-                    <div class="option-price">
-                      2800 руб.
-                    </div>
-                  </div>
-                </div>
-                <div class="service-option ">
-                  <div class="option-img">
-                    <img src="/img/itv25.jpg" alt="">
-                  </div>
-                  <div class="option-info">
-                    <div class="option-desc">
-                      Ресивер <span class="simple-color-green">НТВ+</span>
-                    </div>
-                    <div class="option-price">
-                      4500 руб.
-                    </div>
-                  </div>
-                </div>
-                <div class="service-option ">
-                  <div class="option-img">
-                    <img src="/img/itv11.jpg" alt="">
-                  </div>
-                  <div class="option-info">
-                    <div class="option-desc">
-                      Ресивер <span class="simple-color-blue">Триколор</span>
-                    </div>
-                    <div class="option-price">
-                      5000 руб.
-                    </div>
-                  </div>
-                </div>
-                <div class="service-option ">
-                  <div class="option-img">
-                    <img src="/img/itv18.jpg" alt="">
-                  </div>
-                  <div class="option-info">
-                    <div class="option-desc">
-                      Комплект ресиверов <span class="simple-color-blue">Триколор</span> на 2 телевизора
-                    </div>
-                    <div class="option-price">
-                      9300 руб.
-                    </div>
-                  </div>
-                </div>
-                <div class="service-option ">
-                  <div class="option-img">
-                    <img src="/img/itv20.jpg" alt="">
-                  </div>
-                  <div class="option-info">
-                    <div class="option-desc">
-                      Тарелка спутникого ТВ с кронштейном 55 см
-                    </div>
-                    <div class="option-price">
-                      800 руб.
-                    </div>
-                  </div>
-                </div>
-                <div class="service-option ">
-                  <div class="option-img">
-                    <img src="/img/itv19.jpg" alt="">
-                  </div>
-                  <div class="option-info">
-                    <div class="option-desc">
-                      Тарелка спутникого ТВ с кронштейном 60 см
-                    </div>
-                    <div class="option-price">
-                      1200 руб.
-                    </div>
-                  </div>
-                </div>
-                <div class="service-option ">
-                  <div class="option-img">
-                    <img src="/img/itv23.jpg" alt="">
-                  </div>
-                  <div class="option-info">
-                    <div class="option-desc">
-                      Конвертер с 1 выходом
-                    </div>
-                    <div class="option-price">
-                      400 руб.
-                    </div>
-                  </div>
-                </div>
-                <div class="service-option ">
-                  <div class="option-img">
-                    <img src="/img/itv16.jpg" alt="">
-                  </div>
-                  <div class="option-info">
-                    <div class="option-desc">
-                      Конвертер с 2 выходами
-                    </div>
-                    <div class="option-price">
-                      1000 руб.
-                    </div>
-                  </div>
-                </div>
-                <div class="service-option ">
-                  <div class="option-img">
-                    <img src="/img/itv12.jpg" alt="">
-                  </div>
-                  <div class="option-info">
-                    <div class="option-desc">
-                      Конвертер с 4 выходами
-                    </div>
-                    <div class="option-price">
-                      1500 руб.
-                    </div>
-                  </div>
-                </div>
-                <div class="service-option ">
-                  <div class="option-img">
-                    <img src="/img/itv3.jpg" alt="">
-                  </div>
-                  <div class="option-info">
-                    <div class="option-desc">
-                      Установка спутникового ТВ
-                    </div>
-                    <div class="option-price">
-                      от 2500 руб.
-                    </div>
-                  </div>
-                </div>
-                <div class="service-option ">
-                  <div class="option-img">
-                    <img src="/img/itv6.jpg" alt="">
-                  </div>
-                  <div class="option-info">
-                    <div class="option-desc">
-                      Настройка спутникового ТВ
-                    </div>
-                    <div class="option-price">
-                      от 1000 руб.
-                    </div>
-                  </div>
-                </div>
+            </section>
+            <section class="section page-content">
+                <canvas id="c_digits"></canvas>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-sm-12 col-md-11">
+                            <div class="service-option ">
+                                <div class="option-img">
+                                    <img src="/img/itv5.jpg" alt="">
+                                </div>
+                                <div class="option-info">
+                                    <div class="option-desc">
+                                        Комплект спутникового ТВ <span class="simple-color-red">МТС </span>
+                                    </div>
+                                    <div class="option-price">
+                                        от 2990 руб.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-option ">
+                                <div class="option-img">
+                                    <img src="/img/itv24.jpg" alt="">
+                                </div>
+                                <div class="option-info">
+                                    <div class="option-desc">
+                                        Комплект спутникового ТВ <span class="simple-color-green">НТВ+</span>
+                                    </div>
+                                    <div class="option-price">
+                                        от 5900 руб.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-option ">
+                                <div class="option-img">
+                                    <img src="/img/itv13.jpg" alt="">
+                                </div>
+                                <div class="option-info">
+                                    <div class="option-desc">
+                                        Комплект спутникового ТВ <span class="simple-color-blue">Триколор</span>
+                                    </div>
+                                    <div class="option-price">
+                                        от 6400 руб.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-option ">
+                                <div class="option-img">
+                                    <img src="/img/itv22.jpg" alt="">
+                                </div>
+                                <div class="option-info">
+                                    <div class="option-desc">
+                                        Ресивер <span class="simple-color-red">МТС</span>
+                                    </div>
+                                    <div class="option-price">
+                                        2800 руб.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-option ">
+                                <div class="option-img">
+                                    <img src="/img/itv25.jpg" alt="">
+                                </div>
+                                <div class="option-info">
+                                    <div class="option-desc">
+                                        Ресивер <span class="simple-color-green">НТВ+</span>
+                                    </div>
+                                    <div class="option-price">
+                                        4500 руб.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-option ">
+                                <div class="option-img">
+                                    <img src="/img/itv11.jpg" alt="">
+                                </div>
+                                <div class="option-info">
+                                    <div class="option-desc">
+                                        Ресивер <span class="simple-color-blue">Триколор</span>
+                                    </div>
+                                    <div class="option-price">
+                                        5000 руб.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-option ">
+                                <div class="option-img">
+                                    <img src="/img/itv18.jpg" alt="">
+                                </div>
+                                <div class="option-info">
+                                    <div class="option-desc">
+                                        Комплект ресиверов <span class="simple-color-blue">Триколор</span> на 2
+                                        телевизора
+                                    </div>
+                                    <div class="option-price">
+                                        9300 руб.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-option ">
+                                <div class="option-img">
+                                    <img src="/img/itv20.jpg" alt="">
+                                </div>
+                                <div class="option-info">
+                                    <div class="option-desc">
+                                        Тарелка спутникового ТВ с кронштейном 55 см
+                                    </div>
+                                    <div class="option-price">
+                                        800 руб.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-option ">
+                                <div class="option-img">
+                                    <img src="/img/itv19.jpg" alt="">
+                                </div>
+                                <div class="option-info">
+                                    <div class="option-desc">
+                                        Тарелка спутникового ТВ с кронштейном 60 см
+                                    </div>
+                                    <div class="option-price">
+                                        1200 руб.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-option ">
+                                <div class="option-img">
+                                    <img src="/img/itv23.jpg" alt="">
+                                </div>
+                                <div class="option-info">
+                                    <div class="option-desc">
+                                        Конвертер с 1 выходом
+                                    </div>
+                                    <div class="option-price">
+                                        400 руб.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-option ">
+                                <div class="option-img">
+                                    <img src="/img/itv16.jpg" alt="">
+                                </div>
+                                <div class="option-info">
+                                    <div class="option-desc">
+                                        Конвертер с 2 выходами
+                                    </div>
+                                    <div class="option-price">
+                                        1000 руб.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-option ">
+                                <div class="option-img">
+                                    <img src="/img/itv12.jpg" alt="">
+                                </div>
+                                <div class="option-info">
+                                    <div class="option-desc">
+                                        Конвертер с 4 выходами
+                                    </div>
+                                    <div class="option-price">
+                                        1500 руб.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-option ">
+                                <div class="option-img">
+                                    <img src="/img/itv3.jpg" alt="">
+                                </div>
+                                <div class="option-info">
+                                    <div class="option-desc">
+                                        Установка спутникового ТВ
+                                    </div>
+                                    <div class="option-price">
+                                        от 2500 руб.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-option ">
+                                <div class="option-img">
+                                    <img src="/img/itv6.jpg" alt="">
+                                </div>
+                                <div class="option-info">
+                                    <div class="option-desc">
+                                        Настройка спутникового ТВ
+                                    </div>
+                                    <div class="option-price">
+                                        от 1000 руб.
+                                    </div>
+                                </div>
+                            </div>
 
-                <div class="service-option option-title justify-content-center">
-                  <h3>Интернет на дачу</h3>
-                </div>
+                            <div class="service-option option-title justify-content-center">
+                                <h3>Интернет на дачу</h3>
+                            </div>
 
-                <div class="service-option ">
-                  <div class="option-img">
-                    <img src="/img/itv2.jpg" alt="">
-                  </div>
-                  <div class="option-info">
-                    <div class="option-desc">
-                      Комплект "Интернет на Дачу"
+                            <div class="service-option ">
+                                <div class="option-img">
+                                    <img src="/img/itv2.jpg" alt="">
+                                </div>
+                                <div class="option-info">
+                                    <div class="option-desc">
+                                        Комплект "Интернет на Дачу"
+                                    </div>
+                                    <div class="option-price">
+                                        от 5700 руб.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-option ">
+                                <div class="option-img">
+                                    <img src="/img/itv26.jpg" alt="">
+                                </div>
+                                <div class="option-info">
+                                    <div class="option-desc">
+                                        Антенна усилителя 15 дБ
+                                    </div>
+                                    <div class="option-price">
+                                        2000 руб.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-option ">
+                                <div class="option-img">
+                                    <img src="/img/itv14.jpg" alt="">
+                                </div>
+                                <div class="option-info">
+                                    <div class="option-desc">
+                                        Антенна усилителя 18 дБ
+                                    </div>
+                                    <div class="option-price">
+                                        3000 руб.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-option ">
+                                <div class="option-img">
+                                    <img src="/img/itv15.jpg" alt="">
+                                </div>
+                                <div class="option-info">
+                                    <div class="option-desc">
+                                        Антенна усилителя 22 дБ
+                                    </div>
+                                    <div class="option-price">
+                                        4100 руб.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-option ">
+                                <div class="option-img">
+                                    <img src="/img/itv10.jpg" alt="">
+                                </div>
+                                <div class="option-info">
+                                    <div class="option-desc">
+                                        Универсальный USB модем
+                                    </div>
+                                    <div class="option-price">
+                                        3100 руб.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-option ">
+                                <div class="option-img">
+                                    <img src="/img/itv17.jpg" alt="">
+                                </div>
+                                <div class="option-info">
+                                    <div class="option-desc">
+                                        WiFi роутер
+                                    </div>
+                                    <div class="option-price">
+                                        от 3600 руб.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-option ">
+                                <div class="option-img">
+                                    <img src="/img/itv8.jpg" alt="">
+                                </div>
+                                <div class="option-info">
+                                    <div class="option-desc">
+                                        Кабель Pigtail
+                                    </div>
+                                    <div class="option-price">
+                                        400 руб.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-option ">
+                                <div class="option-img">
+                                    <img src="/img/itv21.jpg" alt="">
+                                </div>
+                                <div class="option-info">
+                                    <div class="option-desc">
+                                        Кабель коаксиальный
+                                    </div>
+                                    <div class="option-price">
+                                        40 руб/м.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-option ">
+                                <div class="option-img">
+                                    <img src="/img/itv4.jpg" alt="">
+                                </div>
+                                <div class="option-info">
+                                    <div class="option-desc">
+                                        Установка и настройка 3G/4G усилителя интернета
+                                    </div>
+                                    <div class="option-price">
+                                        от 4500 руб.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="option-price">
-                      от 5700 руб.
-                    </div>
-                  </div>
                 </div>
-                <div class="service-option ">
-                  <div class="option-img">
-                    <img src="/img/itv26.jpg" alt="">
-                  </div>
-                  <div class="option-info">
-                    <div class="option-desc">
-                      Антенна усилителя 15 дБ
+            </section>
+        </main>
+        <footer id="footer" class="footer">
+            <div class="container">
+                <div class="row justify-content-between flex-column-reverse flex-md-row">
+                    <div class="col-md-6">
+                        <div class="contact">
+                            <h3 class="contact-heading">Контакты</h3>
+                            <a href="tel:+79062522523" class="contact-link contact-phone">+7 (906) 252-252-3</a>
+                            <a href="mailto:tehnohelpluga@gmail.com" class="contact-link contact-email">tehnohelpluga@gmail.com</a>
+                            <div id="vk_subscribe"></div>
+                        </div>
                     </div>
-                    <div class="option-price">
-                      2000 руб.
-                    </div>
-                  </div>
-                </div>
-                <div class="service-option ">
-                  <div class="option-img">
-                    <img src="/img/itv14.jpg" alt="">
-                  </div>
-                  <div class="option-info">
-                    <div class="option-desc">
-                      Антенна усилителя 18 дБ
-                    </div>
-                    <div class="option-price">
-                      3000 руб.
-                    </div>
-                  </div>
-                </div>
-                <div class="service-option ">
-                  <div class="option-img">
-                    <img src="/img/itv15.jpg" alt="">
-                  </div>
-                  <div class="option-info">
-                    <div class="option-desc">
-                      Антенна усилителя 22 дБ
-                    </div>
-                    <div class="option-price">
-                      4100 руб.
-                    </div>
-                  </div>
-                </div>
-                <div class="service-option ">
-                  <div class="option-img">
-                    <img src="/img/itv10.jpg" alt="">
-                  </div>
-                  <div class="option-info">
-                    <div class="option-desc">
-                      Универсальный USB модем
-                    </div>
-                    <div class="option-price">
-                      3100 руб.
-                    </div>
-                  </div>
-                </div>
-                <div class="service-option ">
-                  <div class="option-img">
-                    <img src="/img/itv17.jpg" alt="">
-                  </div>
-                  <div class="option-info">
-                    <div class="option-desc">
-                      WiFi роутер
-                    </div>
-                    <div class="option-price">
-                      от 3600 руб.
-                    </div>
-                  </div>
-                </div>
-                <div class="service-option ">
-                  <div class="option-img">
-                    <img src="/img/itv8.jpg" alt="">
-                  </div>
-                  <div class="option-info">
-                    <div class="option-desc">
-                      Кабель Pigtail
-                    </div>
-                    <div class="option-price">
-                      400 руб.
-                    </div>
-                  </div>
-                </div>
-                <div class="service-option ">
-                  <div class="option-img">
-                    <img src="/img/itv21.jpg" alt="">
-                  </div>
-                  <div class="option-info">
-                    <div class="option-desc">
-                      Кабель коаксиальный
-                    </div>
-                    <div class="option-price">
-                      40 руб/м.
-                    </div>
-                  </div>
-                </div>
-                <div class="service-option ">
-                  <div class="option-img">
-                    <img src="/img/itv4.jpg" alt="">
-                  </div>
-                  <div class="option-info">
-                    <div class="option-desc">
-                      Установка и настройка 3G/4G усилителя интернета
-                    </div>
-                    <div class="option-price">
-                      от 4500 руб.
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-      <footer id="footer" class="footer">
-        <div class="container">
-          <div class="row justify-content-between flex-column-reverse flex-md-row">
-            <div class="col-md-6">
-              <div class="contact">
-                <h3 class="contact-heading">Контакты</h3>
-                <a href="tel:+79062522523" class="contact-link contact-phone">+7 (906) 252-252-3</a>
-                <a href="mailto:tehnohelpluga@gmail.com" class="contact-link contact-email">tehnohelpluga@gmail.com</a>
-                <div id="vk_subscribe"></div>
-              </div>
-            </div>
-            <div class="col-md-5">
-              <div class="order-form">
-                <h3>Оставь заявку прямо сейчас</h3>
-                <form>
-                  <div class="form-group">
-                    <input type="text" class="form-control" id="form-name" name="name"
-                           placeholder="Имя"/>
-                  </div>
+                    <div class="col-md-5">
+                        <div class="order-form">
+                            <h3>Оставь заявку прямо сейчас</h3>
+                            <form>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="form-name" name="name"
+                                           placeholder="Имя"/>
+                                </div>
 
-                  <div class="form-group">
-                    <input type="tel" onkeydown="return phonechange(event, this);" onblur="phoneblur(this)" onfocus="phoneclick(this)" class="form-control form-phone" id="form-phone" name="phone"
-                           maxlength="18" placeholder="+7 (XXX) XXX-XX-XX" autocomplete="on"/>
-                    <p class="err-message"></p>
-                  </div>
+                                <div class="form-group">
+                                    <input type="tel" onkeydown="return phonechange(event, this);"
+                                           onblur="phoneblur(this)" onfocus="phoneclick(this)"
+                                           class="form-control form-phone" id="form-phone" name="phone"
+                                           maxlength="18" placeholder="+7 (XXX) XXX-XX-XX" autocomplete="on"/>
+                                    <p class="err-message"></p>
+                                </div>
 
-                  <div class="form-group">
-                    <input type="text" class="form-control" id="form-theme" name="theme"
-                           placeholder="Тема"/>
-                  </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="form-theme" name="theme"
+                                           placeholder="Тема"/>
+                                </div>
 
-                  <div class="form-group">
+                                <div class="form-group">
                                     <textarea class="form-control message" id="form-message" name="message"
                                               placeholder="Сообщение"></textarea>
-                    <p class="err-message"></p>
-                  </div>
+                                    <p class="err-message"></p>
+                                </div>
 
-                  <div class="form-footer d-flex">
-                    <button type="submit" class="btn btn-primary order-submit">Отправить</button>
-                    <div class="submit-status animated"></div>
-                  </div>
-                </form>
-              </div>
+                                <div class="form-footer d-flex">
+                                    <button type="submit" class="btn btn-primary order-submit">Отправить</button>
+                                    <div class="submit-status animated"></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="footer-bottom">
+                            <p>Tehno help Luga</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <div class="footer-bottom">
-                <p>Tehno help Luga</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
+        </footer>
     </div>
-  </div>
-  <!-- <script src="js/scripts.min.js"></script> -->
-  <script src="js/vendor.js"></script>
-  <script src="js/number_validation.js"></script>
-  <script src="js/main.js"></script>
-  <script src="https://vk.com/js/api/openapi.js?162" type="text/javascript"></script>
+</div>
+<!-- <script src="js/scripts.min.js"></script> -->
+<script src="js/vendor.js"></script>
+<script src="js/number_validation.js"></script>
+<script src="js/main.js"></script>
+<script src="https://vk.com/js/api/openapi.js?162" type="text/javascript"></script>
 </body>
 
 </html>

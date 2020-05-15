@@ -1,5 +1,15 @@
 package ru.tehnohelp.wallpost;
 
+import com.vk.api.sdk.objects.audio.AudioFull;
+import com.vk.api.sdk.objects.docs.Doc;
+import com.vk.api.sdk.objects.market.MarketAlbum;
+import com.vk.api.sdk.objects.market.MarketItem;
+import com.vk.api.sdk.objects.pages.WikipageFull;
+import com.vk.api.sdk.objects.photos.Photo;
+import com.vk.api.sdk.objects.photos.PhotoAlbum;
+import com.vk.api.sdk.objects.polls.Poll;
+import com.vk.api.sdk.objects.video.Video;
+import com.vk.api.sdk.objects.wall.*;
 import org.apache.commons.io.IOUtils;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
@@ -11,10 +21,10 @@ import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static ru.tehnohelp.wallpost.VkWallPosting.loadPostFromWall;
 
 public class LoadPosts {
 
@@ -39,11 +49,40 @@ public class LoadPosts {
                 if (element != null) {
                     String message = element.getElementsByTagName("message").item(0).getTextContent().trim();
                     String attach = element.getElementsByTagName("attachments").item(0).getTextContent().trim();
-                    post = new Post(message, attach + ",https://tehnoluga.ru");
+                    post = new Post(message, attach + "," + getSite(command));
                 } else {
                     VkWallPosting.errorInLoad++;
                 }
             } catch (SAXException | IOException | ParserConfigurationException | NullPointerException e) {
+                e.printStackTrace();
+                VkWallPosting.errorInLoad++;
+            }
+        } else {
+            VkWallPosting.errorInLoad++;
+        }
+        closeResource(resourceAsStream);
+        return post;
+    }
+
+    protected static Post loadPostFromGroup(Command command) {
+        InputStream resourceAsStream = LoadPosts.class.getClassLoader().getResourceAsStream("/posts/groupPosts.properties");
+        Post post = null;
+        Properties prop = new Properties();
+        if (resourceAsStream != null) {
+            try {
+                prop.load(resourceAsStream);
+                String postId = prop.getProperty(command.value);
+                if (postId.contains("null")) {
+                    return null;
+                }
+                WallPostFull wallPostFull = loadPostFromWall(postId);
+                if (wallPostFull != null) {
+                    String attachment = getAttachments(wallPostFull);
+                    post = new Post(wallPostFull.getText(), attachment);
+                } else {
+                    VkWallPosting.errorInLoad++;
+                }
+            } catch (IOException e) {
                 e.printStackTrace();
                 VkWallPosting.errorInLoad++;
             }
@@ -59,9 +98,12 @@ public class LoadPosts {
         InputStream inputStream = LoadPosts.class.getClassLoader().getResourceAsStream("/posts/groupIds.txt");
         try {
             if (inputStream != null) {
-                String result = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-                String[] stringIds = result.split(",");
-                for (String s : stringIds) {
+                String result = IOUtils.toString(inputStream, StandardCharsets.UTF_8).trim();
+                Set<String> strings = Arrays.stream(result.split("[\r\n,]"))
+                        .map(String::trim)
+                        .filter(i -> i.length() > 2)
+                        .collect(Collectors.toSet());
+                for (String s : strings) {
                     try {
                         int i = Integer.parseInt(s);
                         ids.add(i * -1);
@@ -121,10 +163,10 @@ public class LoadPosts {
     }
 
     public static Map<Command, Long> loadTimeMap() {
-        try(ObjectInputStream objectInputStream = new ObjectInputStream(
-                LoadPosts.class.getClassLoader().getResourceAsStream("/posts/resume.txt"))){
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(
+                LoadPosts.class.getClassLoader().getResourceAsStream("/posts/resume.txt"))) {
             return (Map<Command, Long>) objectInputStream.readObject();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -139,5 +181,93 @@ public class LoadPosts {
                 VkWallPosting.errorInLoad++;
             }
         }
+    }
+
+    private static String getSite(Command comand) {
+        switch (comand) {
+            case DOM:
+                return "https://tehnoluga.ru/door-phone";
+            case VIDEO:
+                return "https://tehnoluga.ru/video-surveillance";
+            case TV:
+            case INTERNET:
+                return "https://tehnoluga.ru/tv_and_internet";
+            default:
+                return "https://tehnoluga.ru";
+        }
+    }
+
+    private static String getAttachments(WallPostFull wallPostFull) {
+        List<String> attachList = new ArrayList<>();
+        List<WallpostAttachment> attachments = wallPostFull.getAttachments();
+        for (WallpostAttachment wA : attachments) {
+            WallpostAttachmentType type = wA.getType();
+            String attach = "";
+            switch (type) {
+                case PHOTO:
+                    Photo photo = wA.getPhoto();
+                    attach = "photo" + photo.getOwnerId() + "_" + photo.getId();
+                    break;
+                case POSTED_PHOTO:
+                    PostedPhoto photo1 = wA.getPostedPhoto();
+                    attach = "photo" + photo1.getOwnerId() + "_" + photo1.getId();
+                    break;
+                case AUDIO:
+                    AudioFull audio = wA.getAudio();
+                    attach = "audio" + audio.getOwnerId() + "_" + audio.getId();
+                    break;
+                case VIDEO:
+                    Video video = wA.getVideo();
+                    attach = "video" + video.getOwnerId() + "_" + video.getId();
+                    break;
+                case DOC:
+                    Doc doc = wA.getDoc();
+                    attach = "doc" + doc.getOwnerId() + "_" + doc.getId();
+                    break;
+                case LINK:
+                    attach = wA.getLink().getUrl();
+                    break;
+                case GRAFFITI:
+                    Graffiti graffiti = wA.getGraffiti();
+                    attach = "graffiti" + graffiti.getOwnerId() + "_" + graffiti.getId();
+                    break;
+                case NOTE:
+                    AttachedNote note = wA.getNote();
+                    attach = "note" + note.getOwnerId() + "_" + note.getId();
+                    break;
+                case APP:
+                    break;
+                case POLL:
+                    Poll poll = wA.getPoll();
+                    attach = "poll" + poll.getOwnerId() + "_" + poll.getId();
+                    break;
+                case PAGE:
+                    WikipageFull page = wA.getPage();
+                    attach = "page" + page.getCreatorId() + "_" + page.getId();
+                    break;
+                case ALBUM:
+                    PhotoAlbum album = wA.getAlbum();
+                    attach = "album" + album.getOwnerId() + "_" + album.getId();
+                    break;
+                case PHOTOS_LIST:
+//                    List<String> photosList = wA.getPhotosList();
+//                    StringBuilder builder = new StringBuilder();
+//                    photosList.forEach(i->builder.append("photo").append(i).append(","));
+//                    attach = builder.toString();
+                    break;
+                case MARKET_MARKET_ALBUM:
+                    MarketAlbum marketMarketAlbum = wA.getMarketMarketAlbum();
+                    attach = "market_album" + marketMarketAlbum.getOwnerId() + "_" + marketMarketAlbum.getId();
+                    break;
+                case MARKET:
+                    MarketItem market = wA.getMarket();
+                    attach = "market" + market.getOwnerId() + "_" + market.getId();
+                    break;
+            }
+            attachList.add(attach);
+        }
+        StringBuilder builder = new StringBuilder();
+        attachList.forEach(i -> builder.append(i).append(","));
+        return builder.toString();
     }
 }

@@ -10,7 +10,7 @@ import com.vk.api.sdk.httpclient.HttpTransportClient;
 public class VkMessage {
 
     private static final int GID = 194043958;
-    private static final String GTOKEN = MessageUtils.loadPassword(MessageUtils.VK);
+    private static final String GTOKEN = MessageUtils.loadPassword(MessageUtils.GVK);
 //    private static final String GTOKEN = "";
 
     private static final TransportClient transportClient = HttpTransportClient.getInstance();
