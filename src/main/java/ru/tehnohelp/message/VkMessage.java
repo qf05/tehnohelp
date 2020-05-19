@@ -6,6 +6,7 @@ import com.vk.api.sdk.client.actors.GroupActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.HttpTransportClient;
+import ru.tehnohelp.wallpost.Post;
 
 public class VkMessage {
 
@@ -16,6 +17,7 @@ public class VkMessage {
     private static final TransportClient transportClient = HttpTransportClient.getInstance();
     private static final VkApiClient vk = new VkApiClient(transportClient);
     private static GroupActor gActor = null;
+    private static final Object object = new Object();
 
     private VkMessage() {
     }
@@ -26,17 +28,24 @@ public class VkMessage {
         }
         message = "Новая заявка с сайта: \r\n" + message;
         try {
-            vk.messages().send(gActor)
-                    .randomId((int) (Math.random() * 10000000) + 10)
-//                    .userId(104618701)
-                    .userId(1350733)
-//                    .userId(-184345402)
-                    .message(message)
-                    .execute();
-        } catch (ApiException | ClientException e) {
+            send(message);
+        } catch (ApiException | ClientException |InterruptedException e) {
             e.printStackTrace();
             return false;
         }
         return true;
+    }
+
+    private static synchronized void send(String message) throws ClientException, ApiException, InterruptedException {
+            synchronized (object) {
+                Thread.sleep(350);
+                vk.messages().send(gActor)
+                        .randomId((int) (Math.random() * 10000000) + 10)
+//                    .userId(104618701)
+                        .userId(1350733)
+//                    .userId(-184345402)
+                        .message(message)
+                        .execute();
+            }
     }
 }

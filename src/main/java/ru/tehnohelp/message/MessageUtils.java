@@ -1,7 +1,5 @@
 package ru.tehnohelp.message;
 
-import ru.tehnohelp.wallpost.LoadPosts;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -10,7 +8,8 @@ public class MessageUtils {
 
     public static final String GVK = "token_vk";
     public static final String EMAIL = "password_mail";
-    public static final String VK = "token_garsey";
+    public static final String TOKEN_GARSEY = "token_garsey";
+    public static final String TOKEN_IVANOV = "token_ivanov";
     public static final String CAPTCHA = "captcha_key";
 
     private MessageUtils() {
@@ -29,8 +28,11 @@ public class MessageUtils {
                 case EMAIL:
                     pass = prop.getProperty(EMAIL);
                     break;
-                case VK:
-                    pass = prop.getProperty(VK);
+                case TOKEN_GARSEY:
+                    pass = prop.getProperty(TOKEN_GARSEY);
+                    break;
+                case TOKEN_IVANOV:
+                    pass = prop.getProperty(TOKEN_IVANOV);
                     break;
                 case CAPTCHA:
                     pass = prop.getProperty(CAPTCHA);
@@ -38,10 +40,13 @@ public class MessageUtils {
                 default:
                     pass = "";
             }
+            if (resourceAsStream != null) {
+                resourceAsStream.close();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        LoadPosts.closeResource(resourceAsStream);
+
         return pass;
     }
 

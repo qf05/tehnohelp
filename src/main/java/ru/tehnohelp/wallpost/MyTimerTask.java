@@ -2,7 +2,7 @@ package ru.tehnohelp.wallpost;
 
 import ru.tehnohelp.message.VkMessage;
 
-import java.util.*;
+import java.util.TimerTask;
 
 public class MyTimerTask extends TimerTask {
 
@@ -15,11 +15,9 @@ public class MyTimerTask extends TimerTask {
     @Override
     public void run() {
         String result = VkWallPosting.sendPost(command);
-        if (result.contains("error")) {
-            VkMessage.sendMessage(result);
-        }
-        this.cancel();
+        VkMessage.sendMessage(result);
         CommandService.startTimer(new MyTimerTask(command), null);
+        this.cancel();
     }
 
     public Command getCommand() {

@@ -13,13 +13,12 @@ import com.vk.api.sdk.objects.wall.*;
 import org.apache.commons.io.IOUtils;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
+import ru.tehnohelp.wallpost.addfriends.WasAdd;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -28,105 +27,108 @@ import static ru.tehnohelp.wallpost.VkWallPosting.loadPostFromWall;
 
 public class LoadPosts {
 
+    public static final String PATH = WasAdd.class.getResource("/properties/password.properties")
+            .getPath().replace("/properties/password.properties", "");
+
     protected static Post loadPost(Command command) {
-        InputStream resourceAsStream = LoadPosts.class.getClassLoader().getResourceAsStream("/posts/posts.xml");
+//                InputStream resourceAsStream = LoadPosts.class.getClassLoader().getResourceAsStream("/posts/posts.xml");
         Post post = null;
-        if (resourceAsStream != null) {
-            try {
-                DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-                Document document = builder.parse(resourceAsStream);
-                NodeList posts = document.getElementsByTagName("post");
-                Element element = null;
-                for (int i = 0; i < posts.getLength(); i++) {
-                    Node item = posts.item(i);
-                    NamedNodeMap attributes = item.getAttributes();
-                    String value = attributes.getNamedItem("id").getNodeValue();
-                    if (value.equals(command.value)) {
-                        element = (Element) item;
-                        break;
-                    }
+//        if (resourceAsStream != null) {
+        try (InputStream resourceAsStream = new FileInputStream(PATH + "/posts/posts.xml")) {
+            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            Document document = builder.parse(resourceAsStream);
+            NodeList posts = document.getElementsByTagName("post");
+            Element element = null;
+            for (int i = 0; i < posts.getLength(); i++) {
+                Node item = posts.item(i);
+                NamedNodeMap attributes = item.getAttributes();
+                String value = attributes.getNamedItem("id").getNodeValue();
+                if (value.equals(command.value)) {
+                    element = (Element) item;
+                    break;
                 }
-                if (element != null) {
-                    String message = element.getElementsByTagName("message").item(0).getTextContent().trim();
-                    String attach = element.getElementsByTagName("attachments").item(0).getTextContent().trim();
-                    post = new Post(message, attach + "," + getSite(command));
-                } else {
-                    VkWallPosting.errorInLoad++;
-                }
-            } catch (SAXException | IOException | ParserConfigurationException | NullPointerException e) {
-                e.printStackTrace();
+            }
+            if (element != null) {
+                String message = element.getElementsByTagName("message").item(0).getTextContent().trim();
+                String attach = element.getElementsByTagName("attachments").item(0).getTextContent().trim();
+                post = new Post(message, attach + "," + getSite(command));
+            } else {
                 VkWallPosting.errorInLoad++;
             }
-        } else {
+        } catch (SAXException | IOException | ParserConfigurationException | NullPointerException e) {
+            e.printStackTrace();
             VkWallPosting.errorInLoad++;
         }
-        closeResource(resourceAsStream);
+//        } else {
+//            VkWallPosting.errorInLoad++;
+//        }
+//        closeResource(resourceAsStream);
         return post;
     }
 
     protected static Post loadPostFromGroup(Command command) {
-        InputStream resourceAsStream = LoadPosts.class.getClassLoader().getResourceAsStream("/posts/groupPosts.properties");
+//        InputStream resourceAsStream = LoadPosts.class.getClassLoader().getResourceAsStream("/posts/groupPosts.properties");
         Post post = null;
         Properties prop = new Properties();
-        if (resourceAsStream != null) {
-            try {
-                prop.load(resourceAsStream);
-                String postId = prop.getProperty(command.value);
-                if (postId.contains("null")) {
-                    return null;
-                }
-                WallPostFull wallPostFull = loadPostFromWall(postId);
-                if (wallPostFull != null) {
-                    String attachment = getAttachments(wallPostFull);
-                    post = new Post(wallPostFull.getText(), attachment);
-                } else {
-                    VkWallPosting.errorInLoad++;
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+//        if (resourceAsStream != null) {
+        try (InputStream resourceAsStream = new FileInputStream(PATH + "/posts/groupPosts.properties")) {
+            prop.load(resourceAsStream);
+            String postId = prop.getProperty(command.value);
+            if (postId.contains("null")) {
+                return null;
+            }
+            WallPostFull wallPostFull = loadPostFromWall(postId);
+            if (wallPostFull != null) {
+                String attachment = getAttachments(wallPostFull);
+                post = new Post(wallPostFull.getText(), attachment);
+            } else {
                 VkWallPosting.errorInLoad++;
             }
-        } else {
+        } catch (IOException e) {
+            e.printStackTrace();
             VkWallPosting.errorInLoad++;
         }
-        closeResource(resourceAsStream);
+//        } else {
+//            VkWallPosting.errorInLoad++;
+//        }
+//        closeResource(resourceAsStream);
         return post;
     }
 
     protected static List<Integer> loadIds() {
         List<Integer> ids = new ArrayList<>();
-        InputStream inputStream = LoadPosts.class.getClassLoader().getResourceAsStream("/posts/groupIds.txt");
-        try {
-            if (inputStream != null) {
-                String result = IOUtils.toString(inputStream, StandardCharsets.UTF_8).trim();
-                Set<String> strings = Arrays.stream(result.split("[\r\n,]"))
-                        .map(String::trim)
-                        .filter(i -> i.length() > 2)
-                        .collect(Collectors.toSet());
-                for (String s : strings) {
-                    try {
-                        int i = Integer.parseInt(s);
-                        ids.add(i * -1);
-                    } catch (Exception e) {
-                        VkWallPosting.errorInLoad++;
-                    }
+//        InputStream inputStream = LoadPosts.class.getClassLoader().getResourceAsStream("/posts/groupIds.txt");
+        try (InputStream inputStream = new FileInputStream(PATH + "/posts/groupIds.txt")) {
+//            if (inputStream != null) {
+            String result = IOUtils.toString(inputStream, StandardCharsets.UTF_8).trim();
+            Set<String> strings = Arrays.stream(result.split("[\r\n,]"))
+                    .map(String::trim)
+                    .filter(i -> i.length() > 2)
+                    .collect(Collectors.toSet());
+            for (String s : strings) {
+                try {
+                    int i = Integer.parseInt(s);
+                    ids.add(i * -1);
+                } catch (Exception e) {
+                    VkWallPosting.errorInLoad++;
                 }
-            } else {
-                VkWallPosting.errorInLoad++;
             }
+//            } else {
+//                VkWallPosting.errorInLoad++;
+//            }
         } catch (Exception e) {
             e.printStackTrace();
             VkWallPosting.errorInLoad++;
         }
-        closeResource(inputStream);
+//        closeResource(inputStream);
         return ids;
     }
 
     public static Time getTimeProperty() {
-        InputStream resourceAsStream = LoadPosts.class.getClassLoader().getResourceAsStream("/posts/time.properties");
+//        InputStream resourceAsStream = LoadPosts.class.getClassLoader().getResourceAsStream("/posts/time.properties");
         Properties prop = new Properties();
         Time time = null;
-        try {
+        try (InputStream resourceAsStream = new FileInputStream(PATH + "/posts/time.properties")) {
             prop.load(resourceAsStream);
             time = new Time(Integer.parseInt(prop.getProperty("day_add")),
                     Integer.parseInt(prop.getProperty("day_random")),
@@ -140,20 +142,20 @@ public class LoadPosts {
             e.printStackTrace();
             VkWallPosting.errorInLoad++;
         }
-        closeResource(resourceAsStream);
+//        closeResource(resourceAsStream);
         return time;
     }
 
     public static void saveTimeMap(Map<Command, Long> map) {
-        URL resource = LoadPosts.class.getClassLoader().getResource("/posts/resume.txt");
-        File f = null;
-        try {
-            assert resource != null;
-            f = new File(resource.toURI());
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-        assert f != null;
+//        URL resource = LoadPosts.class.getClassLoader().getResource("/posts/resume.txt");
+        File f = new File(PATH + "/posts/resume.txt");
+//        try  {
+//            assert resource != null;
+//            f = new File(resource.toURI());
+//        } catch (URISyntaxException e) {
+//            e.printStackTrace();
+//        }
+//        assert f != null;
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(
                 new FileOutputStream(f))) {
             objectOutputStream.writeObject(map);
@@ -164,23 +166,12 @@ public class LoadPosts {
 
     public static Map<Command, Long> loadTimeMap() {
         try (ObjectInputStream objectInputStream = new ObjectInputStream(
-                LoadPosts.class.getClassLoader().getResourceAsStream("/posts/resume.txt"))) {
+                new FileInputStream(PATH + "/posts/resume.txt"))) {
             return (Map<Command, Long>) objectInputStream.readObject();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public static void closeResource(InputStream inputStream) {
-        if (inputStream != null) {
-            try {
-                inputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-                VkWallPosting.errorInLoad++;
-            }
-        }
     }
 
     private static String getSite(Command comand) {

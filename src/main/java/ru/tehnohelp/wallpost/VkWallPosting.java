@@ -16,17 +16,17 @@ import java.io.File;
 import java.net.URL;
 
 import static ru.tehnohelp.message.MessageUtils.CAPTCHA;
-import static ru.tehnohelp.message.MessageUtils.VK;
+import static ru.tehnohelp.message.MessageUtils.TOKEN_GARSEY;
 import static ru.tehnohelp.wallpost.LoadPosts.loadPostFromGroup;
 
 public class VkWallPosting {
 
-    private static final int ID = 565153037;
-    private static final String TOKEN = MessageUtils.loadPassword(VK);
+    public static final int ID_GARSAY = 565153037;
+    public static final String GARSAY_TOKEN = MessageUtils.loadPassword(TOKEN_GARSEY);
 
     private static final Object object = new Object();
     private static final TransportClient transportClient = HttpTransportClient.getInstance();
-    private static final VkApiClient vk = new VkApiClient(transportClient);
+    public static final VkApiClient vk = new VkApiClient(transportClient);
     private static UserActor actor = null;
 
     protected static int errorInLoad = 0;
@@ -41,19 +41,17 @@ public class VkWallPosting {
         errorInLoad = 0;
         error = 0;
         if (actor == null) {
-            actor = new UserActor(ID, TOKEN);
+            actor = new UserActor(ID_GARSAY, GARSAY_TOKEN);
         }
         Post post = loadPostFromGroup(key);
-        if (post != null) {
-            if (!post.getMessage().startsWith("not public")) {
+        if (post != null && !post.getMessage().startsWith("not public")) {
                 for (Integer groupId : LoadPosts.loadIds()) {
                     synchronizePost(groupId, post);
                 }
-            }
         } else {
-            return "post error - " + key;
+            return "post null - " + key;
         }
-        return error == 0 && errorInLoad == 0 ? "Команда выполнена" : "COMMAND error " + error + " error load " + errorInLoad;
+        return error == 0 && errorInLoad == 0 ? "Команда post выполнена" : "COMMAND post error " + error + " error load " + errorInLoad;
     }
 
     static long test = 0;
@@ -72,13 +70,17 @@ public class VkWallPosting {
         }
         try {
             loop++;
+            if (captchaSid==null) {
+                Thread.sleep(20843 + (int) (Math.random() * 98179));
+            }else {
+                Thread.sleep(1843 + (int) (Math.random() * 7154));
+            }
             vk.wall().post(actor).ownerId(groupId)
                     .message(post.getMessage())
                     .attachments(post.getAttachments())
                     .captchaSid(captchaSid)
                     .captchaKey(captchaKey)
                     .execute();
-            Thread.sleep(400);
         } catch (ApiCaptchaException e) {
             String decryption = captcha(e.getImage());
             post(groupId, post, e.getSid(), decryption);
@@ -88,7 +90,7 @@ public class VkWallPosting {
         }
     }
 
-    private static String captcha(String captchaImg) {
+    public static String captcha(String captchaImg) {
         String captchaKey = captchaDecryption(captchaImg);
         if (captchaKey.contains("error")) {
             error += 1000;

@@ -8,7 +8,9 @@ public enum Command {
     START("start"),
     RESUME("resume"),
     PROGRESS("progress"),
-    STOP("stop");
+    STOP("stop"),
+    START_ADD("start add"),
+    STOP_ADD("stop add");
 
     public final String value;
 

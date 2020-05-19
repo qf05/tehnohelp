@@ -1,6 +1,8 @@
 package ru.tehnohelp.wallpost;
 
 import ru.tehnohelp.message.VkMessage;
+import ru.tehnohelp.wallpost.addfriends.AddTimerTask;
+import ru.tehnohelp.wallpost.addfriends.TimerAddFriends;
 
 import java.util.*;
 
@@ -29,18 +31,24 @@ public class CommandService {
                 return progress();
             case STOP:
                 return stopTasks();
+            case START_ADD:
+                TimerAddFriends.startAddFriends();
+                return "OK";
+            case STOP_ADD:
+                TimerAddFriends.stopAddFriends();
+               return "OK";
         }
         return "error";
     }
 
     protected static void startTimer(MyTimerTask task, Date time) {
-        int repeat = 1000 * 60 * 60 * 24 * 5;
+//        int repeat = 1000 * 60 * 60 * 24 * 5;
         try {
             if (time == null) {
                 time = nextDateGenerate();
             }
             taskTimers.put(task.getCommand(), task);
-            timer.schedule(task, time, repeat);
+            timer.schedule(task, time);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -96,10 +104,12 @@ public class CommandService {
         if (time != null) {
             time.getAddTime().forEach((key, value) -> calendar.set(key, calendar.get(key) + value));
             time.getRandomTime().forEach((key, value) -> calendar.set(key, calendar.get(key) + (int) (Math.random() * value)));
+            VkMessage.sendMessage("next post " + calendar.get(Calendar.DAY_OF_MONTH)+" " +
+                    calendar.get(Calendar.HOUR_OF_DAY)+ " - " +calendar.get(Calendar.MINUTE));
             return calendar.getTime();
         }
         VkMessage.sendMessage("Time is broken");
-        calendar.set(Calendar.DAY_OF_YEAR, Calendar.DAY_OF_YEAR + 7);
+        calendar.set(Calendar.DAY_OF_YEAR, Calendar.DAY_OF_YEAR + 20);
         return calendar.getTime();
     }
 
