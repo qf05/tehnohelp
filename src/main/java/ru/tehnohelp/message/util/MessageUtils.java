@@ -1,4 +1,4 @@
-package ru.tehnohelp.message;
+package ru.tehnohelp.message.util;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -6,11 +6,16 @@ import java.util.Properties;
 
 public class MessageUtils {
 
-    public static final String GVK = "token_vk";
-    public static final String EMAIL = "password_mail";
+    public static final String GVK = "token_vk_group";
+    public static final String TO_MAIL = "to_mail";
+    public static final String FROM_MAIL_LOGIN_YANDEX = "login_from_mail_yandex";
+    public static final String PASSWORD_MAIL = "password_mail";
     public static final String TOKEN_GARSEY = "token_garsey";
     public static final String TOKEN_IVANOV = "token_ivanov";
     public static final String CAPTCHA = "captcha_key";
+    public static final String SMS_NUMBER = "sms_number";
+    public static final String SMS_LOGIN = "sms_login";
+    public static final String SMS_PASSWORD = "sms_password";
 
     private MessageUtils() {
     }
@@ -22,11 +27,26 @@ public class MessageUtils {
         try {
             prop.load(resourceAsStream);
             switch (property) {
-                case GVK:
+                case SMS_LOGIN:
+                    pass = prop.getProperty(SMS_LOGIN);
+                    break;
+                case SMS_PASSWORD:
+                    pass = prop.getProperty(SMS_PASSWORD);
+                    break;
+                case SMS_NUMBER:
+                    pass = prop.getProperty(SMS_NUMBER);
+                    break;
+                case TO_MAIL:
+                    pass = prop.getProperty(TO_MAIL);
+                    break;
+                case FROM_MAIL_LOGIN_YANDEX:
+                    pass = prop.getProperty(FROM_MAIL_LOGIN_YANDEX);
+                    break;
+                    case GVK:
                     pass = prop.getProperty(GVK);
                     break;
-                case EMAIL:
-                    pass = prop.getProperty(EMAIL);
+                case PASSWORD_MAIL:
+                    pass = prop.getProperty(PASSWORD_MAIL);
                     break;
                 case TOKEN_GARSEY:
                     pass = prop.getProperty(TOKEN_GARSEY);

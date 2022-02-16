@@ -4,21 +4,21 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class TimerAddFriends {
+public class TimerAddToFriends {
 
     private static Timer timer = null;
     public static TimerTask timerTask = null;
 
-    public static void startAddFriends(Date date) {
+    public static void startAddToFriends(Date date) {
         if (timer == null) {
             timer = new Timer(true);
         }
-        timerTask = new AddTimerTask();
+        timerTask = new AddTimerTaskToFriends();
         timer.schedule(timerTask, date);
         System.out.println("start timer");
     }
 
-    public static void stopAddFriends() {
+    public static void stopAddToFriends() {
         if (timerTask != null) {
             timerTask.cancel();
             timerTask = null;

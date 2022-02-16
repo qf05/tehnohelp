@@ -1,9 +1,11 @@
 package ru.tehnohelp.wallpost;
 
+import com.vk.api.sdk.objects.audio.Audio;
 import com.vk.api.sdk.objects.audio.AudioFull;
 import com.vk.api.sdk.objects.docs.Doc;
 import com.vk.api.sdk.objects.market.MarketAlbum;
 import com.vk.api.sdk.objects.market.MarketItem;
+import com.vk.api.sdk.objects.notes.Note;
 import com.vk.api.sdk.objects.pages.WikipageFull;
 import com.vk.api.sdk.objects.photos.Photo;
 import com.vk.api.sdk.objects.photos.PhotoAlbum;
@@ -77,7 +79,7 @@ public class LoadPosts {
             if (postId.contains("null")) {
                 return null;
             }
-            WallPostFull wallPostFull = loadPostFromWall(postId);
+            WallpostFull wallPostFull = loadPostFromWall(postId);
             if (wallPostFull != null) {
                 String attachment = getAttachments(wallPostFull);
                 post = new Post(wallPostFull.getText(), attachment);
@@ -188,7 +190,7 @@ public class LoadPosts {
         }
     }
 
-    private static String getAttachments(WallPostFull wallPostFull) {
+    private static String getAttachments(WallpostFull wallPostFull) {
         List<String> attachList = new ArrayList<>();
         List<WallpostAttachment> attachments = wallPostFull.getAttachments();
         for (WallpostAttachment wA : attachments) {
@@ -204,7 +206,7 @@ public class LoadPosts {
                     attach = "photo" + photo1.getOwnerId() + "_" + photo1.getId();
                     break;
                 case AUDIO:
-                    AudioFull audio = wA.getAudio();
+                    Audio audio = wA.getAudio();
                     attach = "audio" + audio.getOwnerId() + "_" + audio.getId();
                     break;
                 case VIDEO:
@@ -223,7 +225,7 @@ public class LoadPosts {
                     attach = "graffiti" + graffiti.getOwnerId() + "_" + graffiti.getId();
                     break;
                 case NOTE:
-                    AttachedNote note = wA.getNote();
+                    Note note = wA.getNote();
                     attach = "note" + note.getOwnerId() + "_" + note.getId();
                     break;
                 case APP:
@@ -247,7 +249,7 @@ public class LoadPosts {
 //                    attach = builder.toString();
                     break;
                 case MARKET_MARKET_ALBUM:
-                    MarketAlbum marketMarketAlbum = wA.getMarketMarketAlbum();
+                    MarketAlbum marketMarketAlbum = wA.getMarketAlbum();
                     attach = "market_album" + marketMarketAlbum.getOwnerId() + "_" + marketMarketAlbum.getId();
                     break;
                 case MARKET:

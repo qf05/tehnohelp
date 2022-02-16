@@ -7,16 +7,16 @@ import com.vk.api.sdk.exceptions.ApiCaptchaException;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.HttpTransportClient;
-import com.vk.api.sdk.objects.wall.WallPostFull;
+import com.vk.api.sdk.objects.wall.WallpostFull;
 import net.marketer.RuCaptcha;
 import org.apache.commons.io.FileUtils;
-import ru.tehnohelp.message.MessageUtils;
+import ru.tehnohelp.message.util.MessageUtils;
 
 import java.io.File;
 import java.net.URL;
 
-import static ru.tehnohelp.message.MessageUtils.CAPTCHA;
-import static ru.tehnohelp.message.MessageUtils.TOKEN_GARSEY;
+import static ru.tehnohelp.message.util.MessageUtils.CAPTCHA;
+import static ru.tehnohelp.message.util.MessageUtils.TOKEN_GARSEY;
 import static ru.tehnohelp.wallpost.LoadPosts.loadPostFromGroup;
 
 public class VkWallPosting {
@@ -82,8 +82,8 @@ public class VkWallPosting {
                     .captchaKey(captchaKey)
                     .execute();
         } catch (ApiCaptchaException e) {
-            String decryption = captcha(e.getImage());
-            post(groupId, post, e.getSid(), decryption);
+//            String decryption = captcha(e.getImage()); //не работает из-за смены api vk
+//            post(groupId, post, e.getSid(), decryption);
         } catch (ApiException | ClientException | InterruptedException e) {
             error++;
             e.printStackTrace();
@@ -141,10 +141,10 @@ public class VkWallPosting {
         return decryption;
     }
 
-    protected static WallPostFull loadPostFromWall(String postId) {
+    protected static WallpostFull loadPostFromWall(String postId) {
         try {
             Thread.sleep(400);
-            return vk.wall().getById(actor, postId).execute().get(0);
+            return vk.wall().getByIdExtended(actor, postId).execute().getItems().get(0);
         } catch (ApiException | ClientException | InterruptedException e) {
             e.printStackTrace();
         }

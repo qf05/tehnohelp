@@ -6,11 +6,11 @@ import com.vk.api.sdk.client.actors.GroupActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.HttpTransportClient;
-import ru.tehnohelp.wallpost.Post;
+import ru.tehnohelp.message.util.MessageUtils;
 
 public class VkMessage {
 
-    private static final int GID = 194043958;
+    private static final int GID = 184345402; //194043958;
     private static final String GTOKEN = MessageUtils.loadPassword(MessageUtils.GVK);
 //    private static final String GTOKEN = "";
 

@@ -2,11 +2,11 @@ package ru.tehnohelp.servlet;
 
 import com.google.gson.JsonObject;
 import ru.tehnohelp.message.EmailMessage;
-import ru.tehnohelp.message.MessageUtils;
 import ru.tehnohelp.message.VkMessage;
+import ru.tehnohelp.message.util.MessageUtils;
+import ru.tehnohelp.message.SmsMessage;
 import ru.tehnohelp.wallpost.Command;
 import ru.tehnohelp.wallpost.CommandService;
-import ru.tehnohelp.wallpost.VkWallPosting;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,10 +30,10 @@ public class Message extends HttpServlet {
         resp.setCharacterEncoding("utf-8");
         String name = req.getParameter("name");
         String phone = req.getParameter("phone");
-        String theme = req.getParameter("theme");
+        //String theme = req.getParameter("theme");
         String message = req.getParameter("message");
 
-        if ("+7 (921) 924-12-24".equals(phone) && "post".equals(theme)) {
+        if ("+7 (921) 924-12-24".equals(phone)){// && "post".equals(theme)) {
             Command command = Command.getByValue(message.toLowerCase().trim());
             if (command == null) {
                 print(resp, createJson("Ошибка команды", true));
@@ -45,11 +45,15 @@ public class Message extends HttpServlet {
             }
             return;
         }
-
+        String theme = "";
         String sendMessage = MessageUtils.createMessage(name, phone, theme, message);
         boolean isSendVk = VkMessage.sendMessage(sendMessage);
         boolean isSendMail = EmailMessage.sendMessage(sendMessage);
-        if (isSendVk) {
+        boolean isSendSms = SmsMessage.sendMessage(phone);
+        System.out.println("VK = " + isSendVk);
+        System.out.println("Mail = " + isSendMail);
+        System.out.println("SMS = " + isSendSms);
+        if (( isSendVk || isSendMail ) && isSendSms) {
             print(resp, createJson("Ваша заявка принята", false));
         } else {
             print(resp, createJson("Ошибка отправки", true));

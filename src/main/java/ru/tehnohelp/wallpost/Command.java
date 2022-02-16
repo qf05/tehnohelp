@@ -10,7 +10,9 @@ public enum Command {
     PROGRESS("progress"),
     STOP("stop"),
     START_ADD("start add"),
-    STOP_ADD("stop add");
+    STOP_ADD("stop add"),
+    START_F_ADD("start f add"),
+    STOP_F_ADD("stop f add");
 
     public final String value;
 

@@ -125,7 +125,7 @@
           var btn = $(this);
           var form = document.forms[0];
           var phone = form.childNodes[3].childNodes[1];
-          var msg = form.childNodes[7].childNodes[1];
+          var msg = form.childNodes[5].childNodes[1];
 
           phone.classList.remove("invalid");
           phone.nextElementSibling.style.display = "none";

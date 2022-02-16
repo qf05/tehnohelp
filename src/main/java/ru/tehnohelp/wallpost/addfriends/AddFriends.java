@@ -1,17 +1,16 @@
 package ru.tehnohelp.wallpost.addfriends;
 
 import com.vk.api.sdk.client.actors.UserActor;
-import com.vk.api.sdk.exceptions.ApiCaptchaException;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
-import ru.tehnohelp.message.MessageUtils;
+import ru.tehnohelp.message.util.MessageUtils;
 import ru.tehnohelp.message.VkMessage;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static ru.tehnohelp.message.MessageUtils.TOKEN_GARSEY;
+import static ru.tehnohelp.message.util.MessageUtils.TOKEN_GARSEY;
 import static ru.tehnohelp.wallpost.VkWallPosting.*;
 import static ru.tehnohelp.wallpost.addfriends.WasAdd.getGroupNameFile;
 import static ru.tehnohelp.wallpost.addfriends.WasAdd.getUserNameFile;
@@ -29,7 +28,7 @@ public class AddFriends {
     private static int ok = 0;
     private static int notOk = 0;
 
-    public static void addFriends() {
+    public static String addFriends() {
         UserActor actor = getActor();
         int groupId = getGroupId();
         initEnd();
@@ -38,47 +37,55 @@ public class AddFriends {
         notOk = 0;
         List<Integer> friends = getFriends(actor, groupId);
         List<Integer> was = new ArrayList<>();
-        for (int i = 0; i < (int) (Math.random() * 34) + 6; i++) {
+        for (int i = 0; i < (int) (Math.random() * 13) + 26; i++) {
 //        for (int i = 0; i < 2; i++) {
             loop = 0;
+            captchaError = false;
             add(actor, groupId, friends.get(i), null, null);
             if (loop < 5) {
                 was.add(friends.get(i));
             }
         }
         WasAdd.saveWas(was, actor.getId(), groupId);
-        VkMessage.sendMessage("ok add " + was.size() + " to " + groupId + " from " + actor.getId() + " and ok = " + ok + " notOk = " + notOk);
+        return "ok add " + was.size() + " to " + getGroupNameFile(groupId) +
+                " from " + getUserNameFile(actor.getId()) + " and ok = " + ok + " notOk = " + notOk;
     }
 
+    private static boolean captchaError = false;
     private static void add(UserActor actor, Integer groupId, Integer friendId, String captchaSid, String captchaKey) {
-        loop++;
-        if (loop > 5) {
-            return;
-        }
-        try {
-            if (captchaSid == null) {
-                Thread.sleep(3176 + (int) (Math.random() * 49028));
-            } else {
-                Thread.sleep(2238 + (int) (Math.random() * 5294));
-            }
-            Integer value = vk.groups().invite(actor, groupId, friendId)
-                    .captchaSid(captchaSid)
-                    .captchaKey(captchaKey)
-                    .execute().getValue();
-//            System.out.println("Friend id = " + friendId + " add with result = " + value);
-            if (value == 1) {
-                ok++;
-            } else {
-                notOk++;
-            }
-        } catch (ApiCaptchaException e) {
-            String decryption = captcha(e.getImage());
-            add(actor, groupId, friendId, e.getSid(), decryption);
-        } catch (ApiException | ClientException | InterruptedException e) {
-//            e.printStackTrace();
-            notOk++;
-            System.out.println(e.getMessage());
-        }
+//        loop++;
+//        if (loop > 5) {
+//            return;
+//        }
+//        try {
+//            if (captchaSid == null) {
+//                Thread.sleep(3176 + (int) (Math.random() * 49028));
+//            } else {
+//                Thread.sleep(4238 + (int) (Math.random() * 5294));
+//            }
+////            Integer value = vk.groups().invite(actor, groupId, friendId)
+////                    .captchaSid(captchaSid)
+////                    .captchaKey(captchaKey)
+////                    .execute().getValue();
+////            System.out.println("Friend id = " + friendId + " add with result = " + value);
+//            if (value == 1) {
+//                ok++;
+//            } else {
+//                notOk++;
+//            }
+//        } catch (ApiCaptchaException e) {
+//            String decryption = captcha(e.getImage());
+//            add(actor, groupId, friendId, e.getSid(), decryption);
+//            if (captchaError){
+//                VkMessage.sendMessage("Captcha Error");
+//                captchaError = false;
+//            }
+//            captchaError = true;
+//        } catch (ApiException | ClientException | InterruptedException e) {
+////            e.printStackTrace();
+//            notOk++;
+//            System.out.println(e.getMessage());
+//        }
     }
 
     private static UserActor getActor() {

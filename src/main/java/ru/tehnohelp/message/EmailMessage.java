@@ -1,5 +1,7 @@
 package ru.tehnohelp.message;
 
+import ru.tehnohelp.message.util.MessageUtils;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -10,11 +12,11 @@ import java.util.Properties;
 
 public class EmailMessage {
 
-    private static final String username = "qf013";
-    private static final String password = MessageUtils.loadPassword(MessageUtils.EMAIL); // aplication password
+    private static final String username = MessageUtils.loadPassword(MessageUtils.FROM_MAIL_LOGIN_YANDEX);
+    private static final String password = MessageUtils.loadPassword(MessageUtils.PASSWORD_MAIL); // aplication password
 //    private static final String password = ""; // aplication password
 
-    private static final String toEmail = "tehnohelpluga@gmail.com";
+    private static final String toEmail = MessageUtils.loadPassword(MessageUtils.TO_MAIL);
     private static final String theme = "Новая заявка с сайта";
     private static final Properties props;
 
