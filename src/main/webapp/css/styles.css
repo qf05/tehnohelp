@@ -1002,11 +1002,11 @@ pre code {
   margin-right: auto;
   margin-left: auto; }
 
-/*@media (max-width: 992px) {*/
-/*  .description {*/
-/*    max-width: 85%;*/
-/*  }*/
-/*}*/
+@media (max-width: 480px){
+  .page-hero-min{
+    background-position: -260px !important;
+  }
+}
 
 @media (max-width: 1199px) and (min-width: 992px) {
   .description2-img {
@@ -13167,6 +13167,12 @@ p {
   color: red; }
 
 /* Extra Small Devices, Phones */
+@media only screen and (max-width: 480px) {
+  .bg-itv {
+    background-position: 70% 50%;
+  }
+}
+
 @media only screen and (min-width: 480px) {
   .bg-itv {
     background-position: 50% 50%;
