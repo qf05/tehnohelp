@@ -4,16 +4,17 @@ import ru.tehnohelp.message.util.MessageUtils;
 import ru.tehnohelp.message.util.SMSCSender;
 
 public class SmsMessage {
-    private static final String SMS_NUMBER = MessageUtils.loadPassword(MessageUtils.SMS_NUMBER);
+    private static final String SMS_TO_NUMBER = MessageUtils.loadPassword(MessageUtils.SMS_TO_NUMBER);
     private static final String SMS_LOGIN    = MessageUtils.loadPassword(MessageUtils.SMS_LOGIN);
     private static final String SMS_PASSWORD = MessageUtils.loadPassword(MessageUtils.SMS_PASSWORD);
+    private static final String SMS_SENDER = MessageUtils.loadPassword(MessageUtils.SMS_SENDER);
 
     public static boolean sendMessage(String message) {
         message = "tehnoluga zayavka " + message;
         try {
             SMSCSender sd = new SMSCSender(SMS_LOGIN, SMS_PASSWORD);
 
-            final String[] result = sd.sendSms(SMS_NUMBER, message, 1, "", "", 0, "", "");
+            final String[] result = sd.sendSms(SMS_TO_NUMBER, message, 1, "", "", 0, SMS_SENDER, "");
             //sd.getSmsCost("38*********5", "Вы успешно зарегистрированы!", 0, 0, "", "");
             try {
                 double balance = Double.parseDouble(sd.getBalance());

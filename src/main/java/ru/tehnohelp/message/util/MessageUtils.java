@@ -13,8 +13,9 @@ public class MessageUtils {
     public static final String TOKEN_GARSEY = "token_garsey";
     public static final String TOKEN_IVANOV = "token_ivanov";
     public static final String CAPTCHA = "captcha_key";
-    public static final String SMS_NUMBER = "sms_number";
+    public static final String SMS_TO_NUMBER = "sms_to_number";
     public static final String SMS_LOGIN = "sms_login";
+    public static final String SMS_SENDER = "sms_sender";
     public static final String SMS_PASSWORD = "sms_password";
 
     private MessageUtils() {
@@ -27,14 +28,17 @@ public class MessageUtils {
         try {
             prop.load(resourceAsStream);
             switch (property) {
+                case SMS_SENDER:
+                    pass = prop.getProperty(SMS_SENDER);
+                    break;
                 case SMS_LOGIN:
                     pass = prop.getProperty(SMS_LOGIN);
                     break;
                 case SMS_PASSWORD:
                     pass = prop.getProperty(SMS_PASSWORD);
                     break;
-                case SMS_NUMBER:
-                    pass = prop.getProperty(SMS_NUMBER);
+                case SMS_TO_NUMBER:
+                    pass = prop.getProperty(SMS_TO_NUMBER);
                     break;
                 case TO_MAIL:
                     pass = prop.getProperty(TO_MAIL);

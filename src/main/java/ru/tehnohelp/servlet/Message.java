@@ -53,7 +53,7 @@ public class Message extends HttpServlet {
         System.out.println("VK = " + isSendVk);
         System.out.println("Mail = " + isSendMail);
         System.out.println("SMS = " + isSendSms);
-        if (( isSendVk || isSendMail ) && isSendSms) {
+        if (( isSendVk && isSendMail ) || (isSendSms && isSendMail)) {
             print(resp, createJson("Ваша заявка принята", false));
         } else {
             print(resp, createJson("Ошибка отправки", true));
