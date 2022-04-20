@@ -26,7 +26,6 @@ public class VkMessage {
         if (gActor == null) {
             gActor = new GroupActor(GID, GTOKEN);
         }
-        message = "Новая заявка с сайта: \r\n" + message;
         try {
             send(message);
         } catch (ApiException | ClientException |InterruptedException e) {

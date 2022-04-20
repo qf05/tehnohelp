@@ -183,8 +183,9 @@ public class LoadPosts {
             case VIDEO:
                 return "https://tehnoluga.ru/video-surveillance";
             case TV:
+                return "https://tehnoluga.ru/tv";
             case INTERNET:
-                return "https://tehnoluga.ru/tv_and_internet";
+                return "https://tehnoluga.ru/internet";
             default:
                 return "https://tehnoluga.ru";
         }

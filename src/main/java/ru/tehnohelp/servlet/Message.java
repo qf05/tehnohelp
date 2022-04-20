@@ -47,7 +47,7 @@ public class Message extends HttpServlet {
         }
         String theme = "";
         String sendMessage = MessageUtils.createMessage(name, phone, theme, message);
-        boolean isSendVk = VkMessage.sendMessage(sendMessage);
+        boolean isSendVk = VkMessage.sendMessage("Новая заявка с сайта: \r\n" + sendMessage);
         boolean isSendMail = EmailMessage.sendMessage(sendMessage);
         boolean isSendSms = SmsMessage.sendMessage(phone);
         System.out.println("VK = " + isSendVk);

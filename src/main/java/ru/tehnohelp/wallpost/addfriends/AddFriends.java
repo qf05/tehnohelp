@@ -1,6 +1,7 @@
 package ru.tehnohelp.wallpost.addfriends;
 
 import com.vk.api.sdk.client.actors.UserActor;
+import com.vk.api.sdk.exceptions.ApiCaptchaException;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import ru.tehnohelp.message.util.MessageUtils;
@@ -21,8 +22,8 @@ public class AddFriends {
     public static final String IVANOV_TOKEN = MessageUtils.loadPassword(MessageUtils.TOKEN_IVANOV);
 
     public static final Integer TEHNO_ID = 184345402;
-    public static final Integer MTS_ID = 195269445;
-    public static final Integer PHOBOS_ID = 135479896;
+    public static final Integer TV_ID = 195269445;
+    public static final Integer INET_ID = 204329798;
     private static int loop = 0;
     private static List<Integer> end = new ArrayList<>();
     private static int ok = 0;
@@ -37,7 +38,7 @@ public class AddFriends {
         notOk = 0;
         List<Integer> friends = getFriends(actor, groupId);
         List<Integer> was = new ArrayList<>();
-        for (int i = 0; i < (int) (Math.random() * 13) + 26; i++) {
+        for (int i = 0; i < (int) (Math.random() * 13) + 7; i++) {
 //        for (int i = 0; i < 2; i++) {
             loop = 0;
             captchaError = false;
@@ -53,39 +54,39 @@ public class AddFriends {
 
     private static boolean captchaError = false;
     private static void add(UserActor actor, Integer groupId, Integer friendId, String captchaSid, String captchaKey) {
-//        loop++;
-//        if (loop > 5) {
-//            return;
-//        }
-//        try {
-//            if (captchaSid == null) {
-//                Thread.sleep(3176 + (int) (Math.random() * 49028));
-//            } else {
-//                Thread.sleep(4238 + (int) (Math.random() * 5294));
-//            }
-////            Integer value = vk.groups().invite(actor, groupId, friendId)
-////                    .captchaSid(captchaSid)
-////                    .captchaKey(captchaKey)
-////                    .execute().getValue();
-////            System.out.println("Friend id = " + friendId + " add with result = " + value);
-//            if (value == 1) {
-//                ok++;
-//            } else {
-//                notOk++;
-//            }
-//        } catch (ApiCaptchaException e) {
-//            String decryption = captcha(e.getImage());
+        loop++;
+        if (loop > 5) {
+            return;
+        }
+        try {
+            if (captchaSid == null) {
+                Thread.sleep(3176 + (int) (Math.random() * 49028));
+            } else {
+                Thread.sleep(4238 + (int) (Math.random() * 5294));
+            }
+            String value = vk.groups().invite(actor, groupId, friendId)
+                    .captchaSid(captchaSid)
+                    .captchaKey(captchaKey)
+                    .execute().getValue();
+            System.out.println("Friend id = " + friendId + " add with result = " + value);
+            if ("1".equals(value)) {
+                ok++;
+            } else {
+                notOk++;
+            }
+        } catch (ApiCaptchaException e) {
+//            String decryption = captcha(e.getCaptchaImg());
 //            add(actor, groupId, friendId, e.getSid(), decryption);
-//            if (captchaError){
-//                VkMessage.sendMessage("Captcha Error");
-//                captchaError = false;
-//            }
-//            captchaError = true;
-//        } catch (ApiException | ClientException | InterruptedException e) {
-////            e.printStackTrace();
-//            notOk++;
-//            System.out.println(e.getMessage());
-//        }
+            if (captchaError){
+                VkMessage.sendMessage("Captcha Error");
+                captchaError = false;
+            }
+            captchaError = true;
+        } catch (ApiException | ClientException | InterruptedException e) {
+//            e.printStackTrace();
+            notOk++;
+            System.out.println(e.getMessage());
+        }
     }
 
     private static UserActor getActor() {
@@ -99,11 +100,11 @@ public class AddFriends {
     private static Integer getGroupId() {
         switch ((int) (Math.random() * 3)) {
             case 1:
-                return TEHNO_ID;
+//                return TEHNO_ID;
             case 2:
-                return MTS_ID;
+                return INET_ID;
             default:
-                return PHOBOS_ID;
+                return TV_ID;
         }
     }
 
@@ -185,7 +186,7 @@ public class AddFriends {
     private static void initEnd() {
         end = new ArrayList<>();
         end.add(TEHNO_ID);
-        end.add(MTS_ID);
-        end.add(PHOBOS_ID);
+        end.add(TV_ID);
+        end.add(INET_ID);
     }
 }

@@ -6,37 +6,37 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 	<url>
 		<loc>https://tehnoluga.ru/</loc>
-		<lastmod>2021-02-04T18:14:15+01:00</lastmod>
+		<lastmod>2022-03-15T07:04:15+03:00</lastmod>
 		<priority>1.0</priority>
 	</url>
 	<url>
 		<loc>https://tehnoluga.ru/video-surveillance</loc>
-		<lastmod>2021-02-04T18:14:15+01:00</lastmod>
+		<lastmod>2022-03-15T07:04:15+03:00</lastmod>
 		<priority>1.0</priority>
 	</url>
 	<url>
 		<loc>https://tehnoluga.ru/computer-help</loc>
-		<lastmod>2021-02-04T18:14:15+01:00</lastmod>
-		<priority>1.0</priority>
-	</url>
-	<url>
-		<loc>https://tehnoluga.ru/door-phone</loc>
-		<lastmod>2021-02-04T18:14:15+01:00</lastmod>
-		<priority>1.0</priority>
-	</url>
-	<url>
-		<loc>https://tehnoluga.ru/learning</loc>
-		<lastmod>2021-02-04T18:14:15+01:00</lastmod>
+		<lastmod>2022-03-15T07:04:15+03:00</lastmod>
 		<priority>0.8</priority>
 	</url>
 	<url>
+		<loc>https://tehnoluga.ru/door-phone</loc>
+		<lastmod>2022-03-15T07:04:15+03:00</lastmod>
+		<priority>1.0</priority>
+	</url>
+	<url>
+		<loc>https://tehnoluga.ru/internet</loc>
+		<lastmod>2022-03-15T07:04:15+03:00</lastmod>
+		<priority>1.0</priority>
+	</url>
+	<url>
 		<loc>https://tehnoluga.ru/company</loc>
-		<lastmod>2021-02-04T18:14:15+01:00</lastmod>
+		<lastmod>2022-03-15T07:04:15+03:00</lastmod>
 		<priority>0.9</priority>
 	</url>
 	<url>
-		<loc>https://tehnoluga.ru/tv_and_internet</loc>
-		<lastmod>2021-02-04T18:14:15+01:00</lastmod>
+		<loc>https://tehnoluga.ru/tv</loc>
+		<lastmod>2022-03-17T06:10:15+03:00</lastmod>
 		<priority>1.0</priority>
 	</url>
 </urlset>

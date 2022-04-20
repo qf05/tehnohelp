@@ -62,10 +62,10 @@ public class WasAdd {
         String groupName = "";
         if (groupId == TEHNO_ID) {
             groupName = "Tehno";
-        } else if (groupId == PHOBOS_ID) {
-            groupName = "Phobos";
-        } else if (groupId == MTS_ID) {
-            groupName = "Mts";
+        } else if (groupId == INET_ID) {
+            groupName = "Inet";
+        } else if (groupId == TV_ID) {
+            groupName = "TV";
         }
         return groupName;
     }

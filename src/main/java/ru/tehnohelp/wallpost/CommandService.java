@@ -35,7 +35,7 @@ public class CommandService {
             case STOP:
                 return stopTasks();
             case START_ADD:
-                calendar.add(Calendar.HOUR_OF_DAY, 15);
+                calendar.add(Calendar.HOUR_OF_DAY, 10);
                 TimerAddFriends.startAddFriends(calendar.getTime());
                 addProgress = true;
                 return "OK";
