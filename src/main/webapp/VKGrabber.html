@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <div class="order-form">
+        <h3>Post Grabber</h3>
+        <form action="" method="post">
+            <div class="form-group">
+                <input type="text" class="form-control" id="form-password" name="pass"
+                       placeholder="Пароль">
+            </div>
+
+            <div class="form-group">
+                <input style="width: 600px" type="text" class="form-control" id="form-link" name="link"
+                       placeholder="Ссылка">
+            </div>
+
+            <div class="form-group">
+                <input type="datetime-local" class="form-control" id="form-date" name="date"
+                       placeholder="Дата">
+            </div>
+
+            <div class="form-footer d-flex">
+                <button type="submit" class="btn btn-primary order-submit">Отправить</button>
+                <div class="submit-status animated" style="margin: 20px; width: 100px"></div>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="js/vendor.js"></script>
+<script src="js/grabberForm.js"></script>
+</body>
+</html>

@@ -2,6 +2,7 @@ package ru.tehnohelp.servlet;
 
 import com.google.gson.JsonObject;
 import ru.tehnohelp.message.EmailMessage;
+import ru.tehnohelp.message.ModemSMS;
 import ru.tehnohelp.message.VkMessage;
 import ru.tehnohelp.message.util.MessageUtils;
 import ru.tehnohelp.message.SmsMessage;
@@ -49,7 +50,8 @@ public class Message extends HttpServlet {
         String sendMessage = MessageUtils.createMessage(name, phone, theme, message);
         boolean isSendVk = VkMessage.sendMessage("Новая заявка с сайта: \r\n" + sendMessage);
         boolean isSendMail = EmailMessage.sendMessage(sendMessage);
-        boolean isSendSms = SmsMessage.sendMessage(phone);
+//        boolean isSendSms = SmsMessage.sendMessage(phone);
+        boolean isSendSms = ModemSMS.sendMessage(phone);
         System.out.println("VK = " + isSendVk);
         System.out.println("Mail = " + isSendMail);
         System.out.println("SMS = " + isSendSms);
